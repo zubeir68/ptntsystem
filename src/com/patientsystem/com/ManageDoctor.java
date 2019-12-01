@@ -13,6 +13,8 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 
+import com.patientsystem.com.Controller.Doctor;
+
 
 
 public class ManageDoctor {
@@ -101,34 +103,23 @@ public class ManageDoctor {
 		tblclmnNewColumn_9.setWidth(100);
 		tblclmnNewColumn_9.setText("Date Employed");
 		
+		Doctor docs = new Doctor();
+		
 		try {
-			DbConnection db = new DbConnection();
+			ResultSet res = docs.get();
 			
-			Connection connection = db.get_connection();
+			while(res.next()) {
+				TableItem tableItem = new TableItem(table, SWT.NONE);
+				tableItem.setText(0, "Delete");
+				tableItem.setText(1, "Update");
+				tableItem.setText(2, res.getString("First_Name"));
+				tableItem.setText(3, res.getString("Middle_Name"));
+				tableItem.setText(4, res.getString("Last_Name"));
+			}
 			
-			String query = "SELECT * FROM doctor";
-
-	        Statement st = connection.createStatement();
-
-	        ResultSet rs = st.executeQuery(query);
-	        
-	        while (rs.next()) {
-	        	
-	        	
-	        	
-	        }
-	        
 		} catch(Exception e) {
 			System.out.println(e);
 		}
-		
-		
-		
-		TableItem tableItem = new TableItem(table, SWT.NONE);
-		tableItem.setText("foo");
-		
-		
-		
 		
 
 		shlManageDoctor.open();
