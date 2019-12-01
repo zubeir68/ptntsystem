@@ -1,5 +1,9 @@
 package com.patientsystem.com;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
@@ -7,6 +11,9 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
+import org.eclipse.swt.widgets.TableItem;
+
+
 
 public class ManageDoctor {
 	private Table table;
@@ -93,6 +100,36 @@ public class ManageDoctor {
 		TableColumn tblclmnNewColumn_9 = new TableColumn(table, SWT.NONE);
 		tblclmnNewColumn_9.setWidth(100);
 		tblclmnNewColumn_9.setText("Date Employed");
+		
+		try {
+			DbConnection db = new DbConnection();
+			
+			Connection connection = db.get_connection();
+			
+			String query = "SELECT * FROM doctor";
+
+	        Statement st = connection.createStatement();
+
+	        ResultSet rs = st.executeQuery(query);
+	        
+	        while (rs.next()) {
+	        	
+	        	
+	        	
+	        }
+	        
+		} catch(Exception e) {
+			System.out.println(e);
+		}
+		
+		
+		
+		TableItem tableItem = new TableItem(table, SWT.NONE);
+		tableItem.setText("foo");
+		
+		
+		
+		
 
 		shlManageDoctor.open();
 		shlManageDoctor.layout();
