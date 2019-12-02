@@ -67,9 +67,9 @@ public class ManageDoctor extends JFrame {
 		setContentPane(contentPane);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
 		gbl_contentPane.columnWidths = new int[]{826, 0};
-		gbl_contentPane.rowHeights = new int[]{25, 0, 395, 0};
+		gbl_contentPane.rowHeights = new int[]{25, 0, 395, 0, 0};
 		gbl_contentPane.columnWeights = new double[]{1.0, Double.MIN_VALUE};
-		gbl_contentPane.rowWeights = new double[]{0.0, 1.0, 0.0, Double.MIN_VALUE};
+		gbl_contentPane.rowWeights = new double[]{0.0, 1.0, 0.0, 1.0, Double.MIN_VALUE};
 		contentPane.setLayout(gbl_contentPane);
 		
 		JButton btnNewButton = new JButton("Add Doctor");
@@ -85,16 +85,9 @@ public class ManageDoctor extends JFrame {
 		gbc_btnNewButton.gridy = 0;
 		contentPane.add(btnNewButton, gbc_btnNewButton);
 		
-		scrollPane = new JScrollPane();
-		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
-		gbc_scrollPane.insets = new Insets(0, 0, 5, 0);
-		gbc_scrollPane.fill = GridBagConstraints.BOTH;
-		gbc_scrollPane.gridx = 0;
-		gbc_scrollPane.gridy = 1;
-		contentPane.add(scrollPane, gbc_scrollPane);
-		
 		table = new JTable();
 		GridBagConstraints gbc_table = new GridBagConstraints();
+		gbc_table.insets = new Insets(0, 0, 5, 0);
 		gbc_table.fill = GridBagConstraints.BOTH;
 		gbc_table.gridx = 0;
 		gbc_table.gridy = 2;
@@ -102,8 +95,10 @@ public class ManageDoctor extends JFrame {
 		
 		
 		// Table data
-		String[] columns = {"Id", "Specialty-Id", "Firstname", "Lastname", "Middlename", "Lastname", "Gender", "Residence Number", "Cell Number", "Address", "Email", "Date Employed", "Username"};
+		String[] columns = {"Id", "Specialty", "Firstname", "Middlename", "Lastname", "Gender", "Residence Number", "Cell Number", "Address", "Email", "Date Employed", "Username"};
         DefaultTableModel tableModel = new DefaultTableModel(columns, 0);
+        
+        tableModel.addRow(columns);
 
         try {
             Doctor doc = new Doctor();
