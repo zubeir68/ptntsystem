@@ -75,6 +75,8 @@ public class ManageDoctor extends JFrame {
 		JButton btnNewButton = new JButton("Add Doctor");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				CreateDoctor createDoc = new CreateDoctor();
+				createDoc.openFrame();
 			}
 		});
 		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
