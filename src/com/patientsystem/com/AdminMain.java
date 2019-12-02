@@ -28,7 +28,7 @@ public class AdminMain {
             public void actionPerformed(ActionEvent actionEvent) {
                 frame.dispose();
                 ManageDoctor doc = new ManageDoctor();
-                doc.open();
+                doc.openFrame();
             }
         });
 

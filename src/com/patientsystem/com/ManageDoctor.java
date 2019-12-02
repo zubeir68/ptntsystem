@@ -1,133 +1,138 @@
 package com.patientsystem.com;
 
-import java.sql.Connection;
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
 import java.sql.ResultSet;
-import java.sql.Statement;
 
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Table;
-import org.eclipse.swt.widgets.TableColumn;
-import org.eclipse.swt.widgets.TableItem;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 
 import com.patientsystem.com.Controller.Doctor;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JTable;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
+import javax.swing.JScrollPane;
 
+public class ManageDoctor extends JFrame {
 
-
-public class ManageDoctor {
-	private Table table;
+	private JPanel contentPane;
+	private JTable table;
+	private JScrollPane scrollPane;
 
 	/**
 	 * Launch the application.
-	 * @param args
 	 */
 	public static void main(String[] args) {
-		try {
-			ManageDoctor window = new ManageDoctor();
-			window.open();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					ManageDoctor frame = new ManageDoctor();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 
 	/**
-	 * Open the window.
+	 * Create the frame.
 	 */
-	public void open() {
-		Display display = Display.getDefault();
-		Shell shlManageDoctor = new Shell();
-		shlManageDoctor.setSize(1222, 471);
-		shlManageDoctor.setText("Doctor Manager");
-		
-		Label lblNewLabel = new Label(shlManageDoctor, SWT.NONE);
-		lblNewLabel.setText("Manage Doctors");
-		lblNewLabel.setBounds(23, 10, 105, 29);
-		
-		Button btnNewButton = new Button(shlManageDoctor, SWT.NONE);
-		btnNewButton.setBounds(23, 48, 96, 34);
-		btnNewButton.setText("Add Doctor");
-		
-		table = new Table(shlManageDoctor, SWT.BORDER | SWT.FULL_SELECTION);
-		table.setBounds(0, 106, 1208, 33);
-		table.setHeaderVisible(true);
-		table.setLinesVisible(true);
-		
-		TableColumn tblclmnNewColumn_10 = new TableColumn(table, SWT.NONE);
-		tblclmnNewColumn_10.setWidth(100);
-		tblclmnNewColumn_10.setText("Delete");
-		
-		TableColumn tblclmnNewColumn_11 = new TableColumn(table, SWT.NONE);
-		tblclmnNewColumn_11.setWidth(100);
-		tblclmnNewColumn_11.setText("Update");
-		
-		TableColumn tblclmnNewColumn_1 = new TableColumn(table, SWT.NONE);
-		tblclmnNewColumn_1.setWidth(100);
-		tblclmnNewColumn_1.setText("First Name");
-		
-		TableColumn tblclmnNewColumn_2 = new TableColumn(table, SWT.NONE);
-		tblclmnNewColumn_2.setWidth(100);
-		tblclmnNewColumn_2.setText("Middle Name");
-		
-		TableColumn tblclmnNewColumn = new TableColumn(table, SWT.NONE);
-		tblclmnNewColumn.setWidth(100);
-		tblclmnNewColumn.setText("Last Name");
-		
-		TableColumn tblclmnNewColumn_3 = new TableColumn(table, SWT.NONE);
-		tblclmnNewColumn_3.setWidth(100);
-		tblclmnNewColumn_3.setText("Gender");
-		
-		TableColumn tblclmnNewColumn_4 = new TableColumn(table, SWT.NONE);
-		tblclmnNewColumn_4.setWidth(100);
-		tblclmnNewColumn_4.setText("Residence Number");
-		
-		TableColumn tblclmnNewColumn_5 = new TableColumn(table, SWT.NONE);
-		tblclmnNewColumn_5.setWidth(100);
-		tblclmnNewColumn_5.setText("Cell Number");
-		
-		TableColumn tblclmnNewColumn_6 = new TableColumn(table, SWT.NONE);
-		tblclmnNewColumn_6.setWidth(100);
-		tblclmnNewColumn_6.setText("New Column");
-		
-		TableColumn tblclmnNewColumn_7 = new TableColumn(table, SWT.NONE);
-		tblclmnNewColumn_7.setWidth(100);
-		tblclmnNewColumn_7.setText("Address");
-		
-		TableColumn tblclmnNewColumn_8 = new TableColumn(table, SWT.NONE);
-		tblclmnNewColumn_8.setWidth(100);
-		tblclmnNewColumn_8.setText("Email");
-		
-		TableColumn tblclmnNewColumn_9 = new TableColumn(table, SWT.NONE);
-		tblclmnNewColumn_9.setWidth(100);
-		tblclmnNewColumn_9.setText("Date Employed");
-		
-		Doctor docs = new Doctor();
-		
-		try {
-			ResultSet res = docs.get();
-			
-			while(res.next()) {
-				TableItem tableItem = new TableItem(table, SWT.NONE);
-				tableItem.setText(0, "Delete");
-				tableItem.setText(1, "Update");
-				tableItem.setText(2, res.getString("First_Name"));
-				tableItem.setText(3, res.getString("Middle_Name"));
-				tableItem.setText(4, res.getString("Last_Name"));
+	
+	public void openFrame() {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					ManageDoctor frame = new ManageDoctor();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
-			
-		} catch(Exception e) {
-			System.out.println(e);
-		}
-		
-
-		shlManageDoctor.open();
-		shlManageDoctor.layout();
-		while (!shlManageDoctor.isDisposed()) {
-			if (!display.readAndDispatch()) {
-				display.sleep();
-			}
-		}
+		});
 	}
+	
+	public ManageDoctor() {
+		setTitle("Doctor Manager");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 836, 467);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		GridBagLayout gbl_contentPane = new GridBagLayout();
+		gbl_contentPane.columnWidths = new int[]{826, 0};
+		gbl_contentPane.rowHeights = new int[]{25, 0, 395, 0};
+		gbl_contentPane.columnWeights = new double[]{1.0, Double.MIN_VALUE};
+		gbl_contentPane.rowWeights = new double[]{0.0, 1.0, 0.0, Double.MIN_VALUE};
+		contentPane.setLayout(gbl_contentPane);
+		
+		JButton btnNewButton = new JButton("Add Doctor");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
+		gbc_btnNewButton.anchor = GridBagConstraints.NORTH;
+		gbc_btnNewButton.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btnNewButton.insets = new Insets(0, 0, 5, 0);
+		gbc_btnNewButton.gridx = 0;
+		gbc_btnNewButton.gridy = 0;
+		contentPane.add(btnNewButton, gbc_btnNewButton);
+		
+		scrollPane = new JScrollPane();
+		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
+		gbc_scrollPane.insets = new Insets(0, 0, 5, 0);
+		gbc_scrollPane.fill = GridBagConstraints.BOTH;
+		gbc_scrollPane.gridx = 0;
+		gbc_scrollPane.gridy = 1;
+		contentPane.add(scrollPane, gbc_scrollPane);
+		
+		table = new JTable();
+		GridBagConstraints gbc_table = new GridBagConstraints();
+		gbc_table.fill = GridBagConstraints.BOTH;
+		gbc_table.gridx = 0;
+		gbc_table.gridy = 2;
+		contentPane.add(table, gbc_table);
+		
+		
+		// Table data
+		String[] columns = {"Id", "Specialty-Id", "Firstname", "Lastname", "Middlename", "Lastname", "Gender", "Residence Number", "Cell Number", "Address", "Email", "Date Employed", "Username"};
+        DefaultTableModel tableModel = new DefaultTableModel(columns, 0);
+
+        try {
+            Doctor doc = new Doctor();
+            ResultSet rs = doc.get();
+            while(rs.next()) {
+                String id = Integer.toString(rs.getInt("Doctor_id"));
+                String specialty = Integer.toString(rs.getInt("Specialty_id"));
+                String firstname = rs.getString("First_Name");
+                String middlename = rs.getString("Middle_Name");
+                String lastname = rs.getString("Last_Name");
+                String gender = rs.getString("Gender");
+                String residence = Integer.toString(rs.getInt("Residence_Number"));
+                String cell = Integer.toString(rs.getInt("Cell_Number"));
+                String address = rs.getString("Address");
+                String email = rs.getString("Email");
+                String date = rs.getDate("Date_Employed").toString();
+                String username = rs.getString("User_Name");
+                String password = rs.getString("Password");
+
+                String[] data = { id, specialty, firstname, middlename, lastname, gender, residence, cell, address, email, date, username, password };
+
+                tableModel.addRow(data);
+
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        
+        table.setModel(tableModel);
+	}
+
 }
