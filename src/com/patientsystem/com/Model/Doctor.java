@@ -1,11 +1,15 @@
-package com.patientsystem.com.Controller;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.patientsystem.com.Model;
 
-import java.sql.*;
-import com.patientsystem.com.DbConnection;
-import java.util.Calendar;
-
+/**
+ *
+ * @author zumo
+ */
 public class Doctor {
-    
     private int id;
     private String speciality;
     private String firstname;
@@ -25,6 +29,7 @@ public class Doctor {
         this.speciality = Speciality;
         this.firstname = Firstname;
         this.middlename = Middlename;
+        this.lastname = Lastname;
         this.gender = Gender;
         this.residenceNumber = ResidenceNumber;
         this.cellNumber = CellNumber;
@@ -86,55 +91,4 @@ public class Doctor {
     public String getPassword() {
         return password;
     }
-	
-    public ResultSet get() {
-		
-        try {
-	    DbConnection db = new DbConnection();
-	    Connection connection = db.get_connection();
-			
-	    String query = "SELECT * FROM doctor";
-			
-	    Statement st = connection.createStatement();
-			
-	    ResultSet rs = st.executeQuery(query);
-			
-	    return rs;
-			
-	} catch(Exception e) {
-	    System.out.println(e);
-	}
-		
-	return null;
-    }
-
-	public void create(int specId, String firstname , String middlename, String lastname, String gender, int resNum, int cellNum, String address, String email, String username, String password) {
-		DbConnection db = new DbConnection();
-		Connection connection = db.get_connection();
-
-		String query = "insert into doctor (Specialty_id, First_Name, Middle_Name, Last_Name, Gender, Residence_Number, Cell_Number, Address, Email, Date_Employed, User_Name, Password) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
-		try {
-			Calendar calendar = Calendar.getInstance();
-			Date date = new Date(calendar.getTime().getTime());
-
-			PreparedStatement pst = connection.prepareStatement(query);
-			pst.setInt(1, specId);
-			pst.setString(2, firstname);
-			pst.setString(3, middlename);
-			pst.setString(4, lastname);
-			pst.setString(5, gender);
-			pst.setInt(6, resNum);
-			pst.setInt(7, cellNum);
-			pst.setString(8, address);
-			pst.setString(9, email);
-			pst.setDate(10, date);
-			pst.setString(11, username);
-			pst.setString(12, password);
-
-			pst.execute();
-		} catch(Exception e ) {
-			System.out.println(e);
-		}
-	}
 }

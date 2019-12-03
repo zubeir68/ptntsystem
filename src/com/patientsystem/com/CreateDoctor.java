@@ -1,6 +1,6 @@
 package com.patientsystem.com;
 
-import com.patientsystem.com.Controller.Doctor;
+import com.patientsystem.com.Controller.DoctorController;
 
 import javax.swing.*;
 import java.awt.*;
