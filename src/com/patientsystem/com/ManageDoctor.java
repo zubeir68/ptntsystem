@@ -1,135 +1,197 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.patientsystem.com;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-import java.sql.ResultSet;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.table.DefaultTableModel;
-
 import com.patientsystem.com.Controller.Doctor;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.JTable;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import javax.swing.JScrollPane;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import net.proteanit.sql.DbUtils;
 
-public class ManageDoctor extends JFrame {
+/**
+ *
+ * @author zumo
+ */
+public class ManageDoctor extends javax.swing.JFrame {
 
-	private JPanel contentPane;
-	private JTable table;
-	private JScrollPane scrollPane;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ManageDoctor frame = new ManageDoctor();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
-	
-	public void openFrame() {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ManageDoctor frame = new ManageDoctor();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-	
-	public ManageDoctor() {
-		setTitle("Doctor Manager");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 836, 467);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		GridBagLayout gbl_contentPane = new GridBagLayout();
-		gbl_contentPane.columnWidths = new int[]{826, 0};
-		gbl_contentPane.rowHeights = new int[]{25, 0, 395, 0, 0};
-		gbl_contentPane.columnWeights = new double[]{1.0, Double.MIN_VALUE};
-		gbl_contentPane.rowWeights = new double[]{0.0, 1.0, 0.0, 1.0, Double.MIN_VALUE};
-		contentPane.setLayout(gbl_contentPane);
-		
-		JButton btnNewButton = new JButton("Add Doctor");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				CreateDoctor createDoc = new CreateDoctor();
-				createDoc.openFrame();
-			}
-		});
-		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
-		gbc_btnNewButton.anchor = GridBagConstraints.NORTH;
-		gbc_btnNewButton.fill = GridBagConstraints.HORIZONTAL;
-		gbc_btnNewButton.insets = new Insets(0, 0, 5, 0);
-		gbc_btnNewButton.gridx = 0;
-		gbc_btnNewButton.gridy = 0;
-		contentPane.add(btnNewButton, gbc_btnNewButton);
-		
-		table = new JTable();
-		GridBagConstraints gbc_table = new GridBagConstraints();
-		gbc_table.insets = new Insets(0, 0, 5, 0);
-		gbc_table.fill = GridBagConstraints.BOTH;
-		gbc_table.gridx = 0;
-		gbc_table.gridy = 2;
-		contentPane.add(table, gbc_table);
-		
-		
-		// Table data
-		String[] columns = {"Id", "Specialty", "Firstname", "Middlename", "Lastname", "Gender", "Residence Number", "Cell Number", "Address", "Email", "Date Employed", "Username"};
-        DefaultTableModel tableModel = new DefaultTableModel(columns, 0);
+    /**
+     * Creates new form ManageDoctor
+     */
+    public ManageDoctor() {
+        initComponents();
+        displayDocs();
+    }
+    
+    public ArrayList<Doctor> docsList() {
+        ArrayList<Doctor> docsList = new ArrayList<Doctor>();
+        DbConnection db = new DbConnection();
+        Connection connection = db.get_connection();
         
-        tableModel.addRow(columns);
-
+        Statement st;
+        ResultSet rs;
+        String query = "SELECT * FROM doctor";
+        
         try {
-            Doctor doc = new Doctor();
-            ResultSet rs = doc.get();
+            st = connection.createStatement();
+            rs = st.executeQuery(query);
+            Doctor doctor;
+            
             while(rs.next()) {
-                String id = Integer.toString(rs.getInt("Doctor_id"));
-                String specialty = Integer.toString(rs.getInt("Specialty_id"));
-                String firstname = rs.getString("First_Name");
-                String middlename = rs.getString("Middle_Name");
-                String lastname = rs.getString("Last_Name");
-                String gender = rs.getString("Gender");
-                String residence = Integer.toString(rs.getInt("Residence_Number"));
-                String cell = Integer.toString(rs.getInt("Cell_Number"));
-                String address = rs.getString("Address");
-                String email = rs.getString("Email");
-                String date = rs.getDate("Date_Employed").toString();
-                String username = rs.getString("User_Name");
-                String password = rs.getString("Password");
-
-                String[] data = { id, specialty, firstname, middlename, lastname, gender, residence, cell, address, email, date, username, password };
-
-                tableModel.addRow(data);
-
+                String query2 = String.format("SELECT * FROM speciality WHERE Speciality_id = %d ", rs.getInt("Specialty_id"));
+                Statement st2 = connection.createStatement();
+                ResultSet rs2 = st2.executeQuery(query2);
+                String spec;
+                
+                if(rs2.next()) {
+                    spec = rs2.getString("Speciality_Name");
+                    doctor = new Doctor(rs.getInt("Doctor_id"), spec, rs.getString("First_Name"), rs.getString("Middle_Name"), rs.getString("Last_Name"), rs.getString("Gender"), rs.getInt("Residence_Number"), rs.getInt("Cell_Number"), rs.getString("Address"), rs.getString("Email"), rs.getDate("Date_Employed").toString(), rs.getString("User_Name"), rs.getString("Password"));
+                
+                    docsList.add(doctor);
+                } 
+                
+                
             }
-        } catch (Exception e) {
-            System.out.println(e);
+            
+        } catch(Exception e) {
+            JOptionPane.showMessageDialog(null, e);
         }
         
-        table.setModel(tableModel);
-	}
+        return docsList;
+    }
+    
+    public void displayDocs() {
+        ArrayList<Doctor> list = docsList();
+        DefaultTableModel model = (DefaultTableModel)docTable.getModel();
+        Object[] row = new Object[13];
+        
+        for(int i=0; i < list.size(); i++) {
+            System.out.println(list.get(i).getFirstname());
+            row[0] = list.get(i).getId();
+            row[1] = list.get(i).getSpeciality();
+            row[2] = list.get(i).getFirstname();
+            row[3] = list.get(i).getMiddlename();
+            row[4] = list.get(i).getLastname();
+            row[5] = list.get(i).getGender();
+            row[6] = list.get(i).getResidenceNumber();
+            row[7] = list.get(i).getCellNumber();
+            row[8] = list.get(i).getAddress();
+            row[9] = list.get(i).getEmail();
+            row[10] = list.get(i).getDateEmployed();
+            row[11] = list.get(i).getUsername();
+            row[12] = list.get(i).getPassword();
+            
+            model.addRow(row);
+        }
+    }
 
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        docTable = new javax.swing.JTable();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel1.setText("Doctor Manager");
+
+        docTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Id", "Speciality", "Firstname", "Middlename", "Lastname", "Gender", "Residence Number", "Cell Number", "Address", "Email", "Date Employed", "Username", "Password"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, true, true, true, true, true, true, true, true, true, true, true, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(docTable);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1028, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(31, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 162, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27))
+        );
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(ManageDoctor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(ManageDoctor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(ManageDoctor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(ManageDoctor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new ManageDoctor().setVisible(true);
+            }
+        });
+    }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable docTable;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    // End of variables declaration//GEN-END:variables
 }

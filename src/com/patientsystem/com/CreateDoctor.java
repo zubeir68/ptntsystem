@@ -62,7 +62,7 @@ public class CreateDoctor {
         save.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                Doctor doc = new Doctor();
+                // Doctor doc = new Doctor();
                 String gender;
                 if(male.isSelected()) {
                     gender = "MALE";

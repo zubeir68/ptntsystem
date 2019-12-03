@@ -64,5 +64,6 @@ public class Main {
         f.add(panel);
         f.setSize(500,500);
         f.setVisible(true);
+        
     }
 }
