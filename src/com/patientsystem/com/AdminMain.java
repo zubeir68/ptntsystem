@@ -27,9 +27,15 @@ public class AdminMain {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 frame.dispose();
-                ManageDoctor doc = new ManageDoctor();
-                String[] args = {};
-                doc.main(args);
+                new ManageDoctor().setVisible(true);
+            }
+        });
+        
+        i2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                frame.dispose();
+                new ManageReceptionist().setVisible(true);
             }
         });
 

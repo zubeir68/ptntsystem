@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import net.proteanit.sql.DbUtils;
@@ -42,7 +43,6 @@ public class ManageDoctor extends javax.swing.JFrame {
         Object[] row = new Object[13];
         
         for(int i=0; i < list.size(); i++) {
-            System.out.println(list.get(i).getFirstname());
             row[0] = list.get(i).getId();
             row[1] = list.get(i).getSpeciality();
             row[2] = list.get(i).getFirstname();
@@ -431,7 +431,7 @@ public class ManageDoctor extends javax.swing.JFrame {
             int specId = spc.getSpecialityId(spec.getSelectedItem().toString());
             dc.create(specId, tFirstname.getText(), tMiddlename.getText(), tLastname.getText(), tGender.getSelectedItem().toString(), Integer.parseInt(tResidenceNumber.getText()), Integer.parseInt(tCellNumber.getText()), tAddress.getText(), tEmail.getText(), tUsername.getText(), String.valueOf(tPassword.getPassword()));
             
-            JOptionPane.showMessageDialog(null, "Successfully created new row");
+            JOptionPane.showMessageDialog(null, "Successfully created new doctor");
            
             DefaultTableModel model = (DefaultTableModel)docTable.getModel();
            
@@ -452,6 +452,7 @@ public class ManageDoctor extends javax.swing.JFrame {
             dc.update(Integer.parseInt(idLabel.getText()), specId, tFirstname.getText(), tMiddlename.getText(), tLastname.getText(), tGender.getSelectedItem().toString(), Integer.parseInt(tResidenceNumber.getText()), Integer.parseInt(tCellNumber.getText()), tAddress.getText(), tEmail.getText(), tUsername.getText(), String.valueOf(tPassword.getPassword()));
             
             JOptionPane.showMessageDialog(null, "Successfully update table");
+           
             
         } catch(Exception e) {
             JOptionPane.showMessageDialog(null, e);
@@ -466,6 +467,9 @@ public class ManageDoctor extends javax.swing.JFrame {
             dc.delete(Integer.parseInt(idLabel.getText()));
             
             JOptionPane.showMessageDialog(null, "Successfully deleted doctor");
+            
+            
+            
             
         } catch(Exception e) {
             JOptionPane.showMessageDialog(null, e);
