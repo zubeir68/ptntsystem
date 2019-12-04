@@ -21,6 +21,14 @@ public class AdminMain {
         i3=new JMenuItem("Doctor");
         menu.add(i1); menu.add(i2); menu.add(i3);
         menuBar.add(menu);
+        
+        i1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                frame.dispose();
+                new ManagePatient().setVisible(true);
+            }
+        });
 
         //Events
         i3.addActionListener(new ActionListener() {
