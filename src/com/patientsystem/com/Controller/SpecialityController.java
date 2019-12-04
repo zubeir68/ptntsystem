@@ -37,6 +37,26 @@ public class SpecialityController {
             return null;
         }
     }
+    
+    public int getSpecialityId(String name) {
+        DbConnection db = new DbConnection();
+        
+        try {
+            Connection connection = db.get_connection();
+            
+            String query = String.format("SELECT Speciality_Id FROM speciality WHERE Speciality_Name = '%s' ", name);
+            Statement st = connection.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            if(rs.next()) {
+                return rs.getInt("Speciality_Id");
+            }
+            
+            return -1;
+        } catch(Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+            return -1;
+        }
+    }
 
     public void create(String speciality, String description) {
         DbConnection db = new DbConnection();

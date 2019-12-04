@@ -76,4 +76,35 @@ public class DoctorController {
 			System.out.println(e);
 		}
 	}
+        
+    public void update(int id, int specId, String firstname , String middlename, String lastname, String gender, int resNum, int cellNum, String address, String email, String username, String password) {
+        try {
+            
+            DbConnection db = new DbConnection();
+            Connection connection = db.get_connection();
+            
+            String query = String.format("UPDATE doctor SET Specialty_Id = %d, First_Name = '%s', Middle_Name = '%s', Last_Name = '%s', Gender = '%s', Residence_Number = %d, Cell_Number = %d, Address = '%s', Email = '%s', User_Name = '%s', Password = '%s' WHERE Doctor_id = %d", specId, firstname, middlename, lastname, gender, resNum, cellNum, address, email, username, password, id);
+            
+            Statement st = connection.createStatement();
+            st.executeUpdate(query);
+            
+        } catch(Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+            System.out.println(e);
+        }
+    }
+    
+    public void delete(int id) {
+        try {
+            DbConnection db = new DbConnection();
+            Connection connection = db.get_connection();
+            String query = String.format("DELETE FROM doctor WHERE Doctor_id = %d", id);
+            Statement st = connection.createStatement();
+            st.execute(query);
+            
+        } catch(Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+            System.out.println(e);
+        }        
+    }
 }
