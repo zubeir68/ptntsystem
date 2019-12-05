@@ -105,4 +105,21 @@ public class ReceptionistController {
         }
     }
     
+    public String getPassword(String id) {
+        try {
+            DbConnection db = new DbConnection();
+            Connection connection = db.get_connection();
+            String query = String.format("SELECT Password FROM receptionist WHERE Rec_id = %s", id);
+            Statement st = connection.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            if(rs.next()) {
+                return rs.getString("Password");
+            }
+            return null;
+        } catch(Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return null;
+    }
+    
 }

@@ -107,4 +107,63 @@ public class DoctorController {
             System.out.println(e);
         }        
     }
+    
+    public String getPassword(String id) {
+        try {
+            DbConnection db = new DbConnection();
+            Connection connection = db.get_connection();
+            String query = String.format("SELECT Password FROM doctor WHERE Doctor_id = %s", id);
+            Statement st = connection.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            if(rs.next()) {
+                return rs.getString("Password");
+            }
+            return null;
+        } catch(Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return null;
+    }
+    
+    public String[] getDoctorInfo() {
+        DbConnection db = new DbConnection();
+        
+        try {
+            Connection connection = db.get_connection();
+            
+            ArrayList<String> ar = new ArrayList<String>();
+            Statement st = connection.createStatement();
+            String query = "SELECT Doctor_id, Last_Name from doctor";
+            ResultSet rs = st.executeQuery(query);
+            while(rs.next()) {
+                ar.add(String.format("%d : %s", rs.getInt("Doctor_id"), rs.getString("Last_Name")));
+            }
+            
+            String[] dinfo = new String[ar.size()];
+            dinfo =  ar.toArray(dinfo);
+            
+            return dinfo;
+        } catch(Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+            return null;
+        }
+    }
+    
+    public String getOneDoctor(int id) {
+        DbConnection db = new DbConnection();
+        
+        try {
+            Connection connection = db.get_connection();
+            String query = String.format("SELECT Doctor_id, Last_Name from doctor WHERE Doctor_id = %d", id);
+            Statement st = connection.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            if(rs.next()) {
+                return String.format("%d : %s", rs.getInt("Doctor_id"), rs.getString("Last_Name"));
+            }
+            return null;
+        } catch(Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+            return null;
+        }
+    }
 }

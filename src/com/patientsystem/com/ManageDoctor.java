@@ -11,14 +11,16 @@ import com.patientsystem.com.Model.Doctor;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
-import net.proteanit.sql.DbUtils;
 
 /**
  *
@@ -55,7 +57,6 @@ public class ManageDoctor extends javax.swing.JFrame {
             row[9] = list.get(i).getEmail();
             row[10] = list.get(i).getDateEmployed();
             row[11] = list.get(i).getUsername();
-            row[12] = list.get(i).getPassword();
             
             model.addRow(row);
         }
@@ -108,6 +109,7 @@ public class ManageDoctor extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         idLabel = new javax.swing.JLabel();
         tPassword = new javax.swing.JPasswordField();
+        resetButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -125,11 +127,11 @@ public class ManageDoctor extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Id", "Speciality", "Firstname", "Middlename", "Lastname", "Gender", "Residence Number", "Cell Number", "Address", "Email", "Date Employed", "Username", "Password"
+                "Id", "Speciality", "Firstname", "Middlename", "Lastname", "Gender", "Residence Number", "Cell Number", "Address", "Email", "Date Employed", "Username"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, true, true, true, true, true, true, true, true, true, true, true, true
+                false, true, true, true, true, true, true, true, true, true, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -228,6 +230,18 @@ public class ManageDoctor extends javax.swing.JFrame {
 
         idLabel.setText("None");
 
+        resetButton.setText("Reset Fields");
+        resetButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                resetButtonMouseClicked(evt);
+            }
+        });
+        resetButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                resetButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -294,7 +308,9 @@ public class ManageDoctor extends javax.swing.JFrame {
                                             .addComponent(tPassword, javax.swing.GroupLayout.Alignment.TRAILING)))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(18, 18, 18)
-                                        .addComponent(jButton3))))))
+                                        .addComponent(jButton3)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(resetButton))))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(26, 26, 26)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -359,7 +375,8 @@ public class ManageDoctor extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jButton1)
                                     .addComponent(jButton2)
-                                    .addComponent(jButton3)))
+                                    .addComponent(jButton3)
+                                    .addComponent(resetButton)))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel10)
                                 .addGap(6, 6, 6)
@@ -420,7 +437,10 @@ public class ManageDoctor extends javax.swing.JFrame {
         tAddress.setText(model.getValueAt(i, 8).toString());
         tEmail.setText(model.getValueAt(i, 9).toString());
         tUsername.setText(model.getValueAt(i, 11).toString());
-        tPassword.setText(model.getValueAt(i, 12).toString());
+        
+        //Fetch Password and display to Passwordfield
+        DoctorController dc = new DoctorController();
+        tPassword.setText(dc.getPassword(idLabel.getText()));
     }//GEN-LAST:event_docTableMouseClicked
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
@@ -445,13 +465,19 @@ public class ManageDoctor extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         try {
-            SpecialityController spc = new SpecialityController();
-            DoctorController dc = new DoctorController();
-            int specId = spc.getSpecialityId(spec.getSelectedItem().toString());
             
-            dc.update(Integer.parseInt(idLabel.getText()), specId, tFirstname.getText(), tMiddlename.getText(), tLastname.getText(), tGender.getSelectedItem().toString(), Integer.parseInt(tResidenceNumber.getText()), Integer.parseInt(tCellNumber.getText()), tAddress.getText(), tEmail.getText(), tUsername.getText(), String.valueOf(tPassword.getPassword()));
+            if(idLabel.getText() != "None") {
+                SpecialityController spc = new SpecialityController();
+                DoctorController dc = new DoctorController();
+                int specId = spc.getSpecialityId(spec.getSelectedItem().toString());
             
-            JOptionPane.showMessageDialog(null, "Successfully update table");
+                dc.update(Integer.parseInt(idLabel.getText()), specId, tFirstname.getText(), tMiddlename.getText(), tLastname.getText(), tGender.getSelectedItem().toString(), Integer.parseInt(tResidenceNumber.getText()), Integer.parseInt(tCellNumber.getText()), tAddress.getText(), tEmail.getText(), tUsername.getText(), String.valueOf(tPassword.getPassword()));
+            
+                JOptionPane.showMessageDialog(null, "Successfully update table");
+            
+            } else {
+                JOptionPane.showMessageDialog(null, "Please select a doctor in the table");
+            }
            
             
         } catch(Exception e) {
@@ -463,19 +489,37 @@ public class ManageDoctor extends javax.swing.JFrame {
     private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
         // TODO add your handling code here:
         try {
-            DoctorController dc = new DoctorController();
-            dc.delete(Integer.parseInt(idLabel.getText()));
+            if(idLabel.getText() != "None") {
+                DoctorController dc = new DoctorController();
+                dc.delete(Integer.parseInt(idLabel.getText()));
             
-            JOptionPane.showMessageDialog(null, "Successfully deleted doctor");
-            
-            
-            
-            
+                JOptionPane.showMessageDialog(null, "Successfully deleted doctor");
+            } else {
+                JOptionPane.showMessageDialog(null, "Please select a doctor in the table");
+            }
         } catch(Exception e) {
             JOptionPane.showMessageDialog(null, e);
             System.out.println(e);
         }
     }//GEN-LAST:event_jButton3MouseClicked
+
+    private void resetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_resetButtonActionPerformed
+
+    private void resetButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_resetButtonMouseClicked
+        // TODO add your handling code here:
+        idLabel.setText("None");
+        tFirstname.setText("");
+        tMiddlename.setText("");
+        tLastname.setText("");
+        tResidenceNumber.setText("");
+        tCellNumber.setText("");
+        tAddress.setText("");
+        tEmail.setText("");
+        tUsername.setText("");
+        tPassword.setText("");
+    }//GEN-LAST:event_resetButtonMouseClicked
 
     /**
      * @param args the command line arguments
@@ -534,6 +578,7 @@ public class ManageDoctor extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton resetButton;
     private javax.swing.JComboBox<String> spec;
     private java.awt.TextField tAddress;
     private java.awt.TextField tCellNumber;

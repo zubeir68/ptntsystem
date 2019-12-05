@@ -44,10 +44,9 @@ public class ManageReceptionist extends javax.swing.JFrame {
             row[2] = list.get(i).getMiddlename();
             row[3] = list.get(i).getLastname();
             row[4] = list.get(i).getUsername();
-            row[5] = list.get(i).getPassword();
-            row[6] = list.get(i).getContactNumber();
-            row[7] = list.get(i).getEmail();
-            row[8] = list.get(i).getAddress();
+            row[5] = list.get(i).getContactNumber();
+            row[6] = list.get(i).getEmail();
+            row[7] = list.get(i).getAddress();
             
             model.addRow(row);
         }
@@ -88,6 +87,7 @@ public class ManageReceptionist extends javax.swing.JFrame {
         insertButton = new javax.swing.JButton();
         updateButton = new javax.swing.JButton();
         deleteButton = new javax.swing.JButton();
+        resetButton = new javax.swing.JButton();
 
         jRadioButtonMenuItem1.setSelected(true);
         jRadioButtonMenuItem1.setText("jRadioButtonMenuItem1");
@@ -105,11 +105,11 @@ public class ManageReceptionist extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Id", "Firstname", "Middlename", "Lastname", "Username", "Password", "Contactnumber", "Email", "Address"
+                "Id", "Firstname", "Middlename", "Lastname", "Username", "Contactnumber", "Email", "Address"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, true, true, true, true, true, true, true, true
+                false, true, true, true, true, true, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -172,6 +172,13 @@ public class ManageReceptionist extends javax.swing.JFrame {
             }
         });
 
+        resetButton.setText("Reset Fields");
+        resetButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                resetButtonMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -209,24 +216,27 @@ public class ManageReceptionist extends javax.swing.JFrame {
                                     .addComponent(tMiddlename, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(tPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
                                     .addComponent(tAddress, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(80, 80, 80)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel8))
-                                .addGap(49, 49, 49)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(tLastname, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(tContactNumber, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE))))
-                        .addGap(0, 116, Short.MAX_VALUE)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(80, 80, 80)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel5)
+                                            .addComponent(jLabel8))
+                                        .addGap(49, 49, 49)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(tLastname, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(tContactNumber, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(58, 58, 58)
+                                        .addComponent(insertButton)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(updateButton)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(deleteButton)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(resetButton)))))
+                        .addGap(0, 51, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(insertButton)
-                .addGap(27, 27, 27)
-                .addComponent(updateButton)
-                .addGap(30, 30, 30)
-                .addComponent(deleteButton)
-                .addGap(108, 108, 108))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -259,22 +269,22 @@ public class ManageReceptionist extends javax.swing.JFrame {
                     .addComponent(tContactNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(48, 48, 48)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel9)
-                    .addComponent(tEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10)
-                    .addComponent(tAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel9)
+                            .addComponent(tEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel10)
+                            .addComponent(tAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(insertButton)
                             .addComponent(updateButton)
-                            .addComponent(deleteButton))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(deleteButton)
+                            .addComponent(resetButton))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18))
         );
 
         pack();
@@ -297,10 +307,13 @@ public class ManageReceptionist extends javax.swing.JFrame {
         tMiddlename.setText(model.getValueAt(i, 2).toString());
         tLastname.setText(model.getValueAt(i, 3).toString());
         tUsername.setText(model.getValueAt(i, 4).toString());
-        tPassword.setText(model.getValueAt(i, 5).toString());
-        tContactNumber.setText(model.getValueAt(i, 6).toString());
-        tEmail.setText(model.getValueAt(i, 7).toString());
-        tAddress.setText(model.getValueAt(i, 8).toString());
+        
+        //Fetch Password and display to password field
+        ReceptionistController rc = new ReceptionistController();
+        tPassword.setText(rc.getPassword(idLabel.getText()));
+        tContactNumber.setText(model.getValueAt(i, 5).toString());
+        tEmail.setText(model.getValueAt(i, 6).toString());
+        tAddress.setText(model.getValueAt(i, 7).toString());
     }//GEN-LAST:event_recTableMouseClicked
 
     private void insertButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_insertButtonMouseClicked
@@ -341,6 +354,19 @@ public class ManageReceptionist extends javax.swing.JFrame {
             System.out.println(e);
         }
     }//GEN-LAST:event_deleteButtonMouseClicked
+
+    private void resetButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_resetButtonMouseClicked
+        // TODO add your handling code here:
+        idLabel.setText("None");
+        tFirstname.setText("");
+        tMiddlename.setText("");
+        tLastname.setText("");
+        tUsername.setText("");
+        tPassword.setText("");
+        tContactNumber.setText("");
+        tEmail.setText("");
+        tAddress.setText("");
+    }//GEN-LAST:event_resetButtonMouseClicked
 
     /**
      * @param args the command line arguments
@@ -394,6 +420,7 @@ public class ManageReceptionist extends javax.swing.JFrame {
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable recTable;
+    private javax.swing.JButton resetButton;
     private java.awt.TextField tAddress;
     private java.awt.TextField tContactNumber;
     private java.awt.TextField tEmail;
