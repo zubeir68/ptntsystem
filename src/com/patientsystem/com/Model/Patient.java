@@ -30,9 +30,8 @@ public class Patient {
     private String insurancenumber;
     private String dateofregistration;
     private int doctor;
-    private int historyid;
     
-    public Patient(int Id, String Firstname, String Middlename, String Lastname, String DateOfBirth, String Gender, int ResidenceNumber, int CellNumber, String Address, String Email, String City, String Country, String HealthCardNumber, String InsuredOrNot, String InsuranceType, String InsuranceName, String InsuranceNumber, String DateOfRegistration, int Doctor, int HistoryId) {
+    public Patient(int Id, String Firstname, String Middlename, String Lastname, String DateOfBirth, String Gender, int ResidenceNumber, int CellNumber, String Address, String Email, String City, String Country, String HealthCardNumber, String InsuredOrNot, String InsuranceType, String InsuranceName, String InsuranceNumber, String DateOfRegistration, int Doctor) {
         this.id = Id;
         this.firstname = Firstname;
         this.middlename = Middlename;
@@ -52,7 +51,6 @@ public class Patient {
         this.insurancenumber = InsuranceNumber;
         this.dateofregistration = DateOfRegistration;
         this.doctor = Doctor;
-        this.historyid = HistoryId;
     }
     
     public int getId() {
@@ -129,9 +127,5 @@ public class Patient {
     
     public int getDoctor() {
         return doctor;
-    }
-    
-    public int getHistoryId() {
-        return historyid;
     }
 }
