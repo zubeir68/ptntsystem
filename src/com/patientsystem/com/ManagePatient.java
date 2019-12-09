@@ -230,6 +230,11 @@ public class ManagePatient extends javax.swing.JFrame {
         });
 
         jButton1.setText("Patient History");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
 
         resetButton.setText("Reset Fields");
         resetButton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -536,7 +541,7 @@ public class ManagePatient extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Successfully update table");
                 
             } else {
-                JOptionPane.showMessageDialog(null, "Please select a doctor in the table");
+                JOptionPane.showMessageDialog(null, "Please select a row in the table");
             }
         } catch(Exception e) {
             JOptionPane.showMessageDialog(null, e);
@@ -553,13 +558,22 @@ public class ManagePatient extends javax.swing.JFrame {
             
                 JOptionPane.showMessageDialog(null, "Successfully deleted doctor");
             } else {
-                JOptionPane.showMessageDialog(null, "Please select a doctor in the table");
+                JOptionPane.showMessageDialog(null, "Please select a row in the table");
             }
         } catch(Exception e) {
             JOptionPane.showMessageDialog(null, e);
             System.out.println(e);
         }
     }//GEN-LAST:event_deleteButtonMouseClicked
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        // TODO add your handling code here:
+        if(idLabel.getText() != "None") {
+            new ManagePatientHistory(Integer.parseInt(idLabel.getText()), tFirstname.getText(), tLastname.getText()).setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "Please select a row in the table");
+        }
+    }//GEN-LAST:event_jButton1MouseClicked
 
     /**
      * @param args the command line arguments
