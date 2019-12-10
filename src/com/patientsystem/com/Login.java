@@ -94,11 +94,6 @@ public class Login {
                 return false;
             }
 
-            System.out.println("Sesam offne dich");
-
-
-
-
         } catch (Exception e) {
             System.out.println(e);
             return false;
