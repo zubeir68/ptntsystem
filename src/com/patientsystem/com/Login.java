@@ -45,16 +45,17 @@ public class Login {
                 if(res) {
                     if(subject == "Admin") {
                         fLogin.dispose();
-                        AdminMain am = new AdminMain();
-                        am.openFrame();
+                        new AdminMain(textField1.getText()).setVisible(true);
                     }
 
                     if(subject == "Receptionist") {
-
+                        fLogin.dispose();
+                        new ReceptionistMain(textField1.getText()).setVisible(true);
                     }
 
                     if(subject == "Doctor") {
-
+                        fLogin.dispose();
+                        new DoctorMain(textField1.getText()).setVisible(true);
                     }
                 } else {
                    JOptionPane.showMessageDialog(null, "Username or Password is wrong");

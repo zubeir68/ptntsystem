@@ -64,6 +64,7 @@ public class ManageSpeciality extends javax.swing.JFrame {
         updateButton = new javax.swing.JButton();
         deleteButton = new javax.swing.JButton();
         resetButton = new javax.swing.JButton();
+        homeButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -140,6 +141,13 @@ public class ManageSpeciality extends javax.swing.JFrame {
             }
         });
 
+        homeButton.setText("Home");
+        homeButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                homeButtonMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -154,7 +162,9 @@ public class ManageSpeciality extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(idLabel))
+                                .addComponent(idLabel)
+                                .addGap(66, 66, 66)
+                                .addComponent(homeButton))
                             .addComponent(jLabel1)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel4)
@@ -180,11 +190,12 @@ public class ManageSpeciality extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addComponent(jLabel1)
-                .addGap(26, 26, 26)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(idLabel))
-                .addGap(22, 22, 22)
+                    .addComponent(idLabel)
+                    .addComponent(homeButton))
+                .addGap(14, 14, 14)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jLabel3))
@@ -293,6 +304,13 @@ public class ManageSpeciality extends javax.swing.JFrame {
         tDescription.setText("");
     }//GEN-LAST:event_resetButtonMouseClicked
 
+    private void homeButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homeButtonMouseClicked
+        // TODO add your handling code here:
+        this.dispose();
+        Main main = new Main();
+        main.openFrame();
+    }//GEN-LAST:event_homeButtonMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -330,6 +348,7 @@ public class ManageSpeciality extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton deleteButton;
+    private javax.swing.JButton homeButton;
     private javax.swing.JLabel idLabel;
     private javax.swing.JButton insertButton;
     private javax.swing.JLabel jLabel1;

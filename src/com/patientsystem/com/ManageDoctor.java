@@ -110,6 +110,7 @@ public class ManageDoctor extends javax.swing.JFrame {
         idLabel = new javax.swing.JLabel();
         tPassword = new javax.swing.JPasswordField();
         resetButton = new javax.swing.JButton();
+        homeButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -242,6 +243,13 @@ public class ManageDoctor extends javax.swing.JFrame {
             }
         });
 
+        homeButton.setText("Home");
+        homeButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                homeButtonMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -257,8 +265,13 @@ public class ManageDoctor extends javax.swing.JFrame {
                                 .addComponent(jLabel13)
                                 .addGap(18, 18, 18)
                                 .addComponent(idLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel14))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel14))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(42, 42, 42)
+                                        .addComponent(homeButton))))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel2)
@@ -324,7 +337,8 @@ public class ManageDoctor extends javax.swing.JFrame {
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel13)
                     .addComponent(jLabel14)
-                    .addComponent(idLabel))
+                    .addComponent(idLabel)
+                    .addComponent(homeButton))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -529,6 +543,13 @@ public class ManageDoctor extends javax.swing.JFrame {
         tPassword.setText("");
     }//GEN-LAST:event_resetButtonMouseClicked
 
+    private void homeButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homeButtonMouseClicked
+        // TODO add your handling code here:
+        this.dispose();
+        Main main = new Main();
+        main.openFrame();
+    }//GEN-LAST:event_homeButtonMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -567,6 +588,7 @@ public class ManageDoctor extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable docTable;
+    private javax.swing.JButton homeButton;
     private javax.swing.JLabel idLabel;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
