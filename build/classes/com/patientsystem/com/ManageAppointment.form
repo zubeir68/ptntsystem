@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <Properties>
+    <Property name="defaultCloseOperation" type="int" value="3"/>
+  </Properties>
+  <SyntheticProperties>
+    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+  </SyntheticProperties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="JScrollPane1" alignment="0" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="tDate" min="-2" pref="223" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="slot7" min="-2" max="-2" attributes="0"/>
+                                          <Component id="slot1" min="-2" max="-2" attributes="0"/>
+                                          <Component id="slot13" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="insertButton" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="deleteButton" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jLabel1" min="-2" pref="271" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="tFirstname" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="idLabel" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                      </Group>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="slot2" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="slot8" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="slot14" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="slot9" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="slot3" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="slot15" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="slot16" min="-2" max="-2" attributes="0"/>
+                                  <Component id="slot10" min="-2" max="-2" attributes="0"/>
+                                  <Component id="slot4" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="slot11" min="-2" max="-2" attributes="0"/>
+                                  <Component id="slot17" min="-2" max="-2" attributes="0"/>
+                                  <Component id="slot5" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="slot6" min="-2" max="-2" attributes="0"/>
+                                  <Component id="slot18" min="-2" max="-2" attributes="0"/>
+                                  <Component id="slot12" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="tLastname" min="-2" pref="174" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="tDoctor" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                                      <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="tPatient" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                      </Group>
+                      <EmptySpace min="0" pref="191" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="tFirstname" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="tLastname" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                      <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="idLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="tDoctor" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="tPatient" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="tDate" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="slot1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="slot2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="slot3" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="slot4" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="slot5" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="slot6" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="slot7" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="slot8" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="slot9" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="slot10" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="slot11" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="slot12" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="slot15" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="slot16" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="slot14" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="slot13" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="slot17" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="slot18" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="52" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="insertButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="deleteButton" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="JScrollPane1" min="-2" pref="265" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Container class="javax.swing.JScrollPane" name="JScrollPane1">
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTable" name="appTable">
+          <Properties>
+            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+              <Table columnCount="6" rowCount="0">
+                <Column editable="false" title="Id" type="java.lang.Object"/>
+                <Column editable="false" title="Doctor" type="java.lang.Object"/>
+                <Column editable="false" title="Patient Id" type="java.lang.Object"/>
+                <Column editable="true" title="Date of App" type="java.lang.Object"/>
+                <Column editable="true" title="Start Time " type="java.lang.Object"/>
+                <Column editable="true" title="End Time" type="java.lang.Object"/>
+              </Table>
+            </Property>
+            <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+              <TableColumnModel selectionModel="0">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+              </TableColumnModel>
+            </Property>
+            <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
+              <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="appTableMouseClicked"/>
+          </Events>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JLabel" name="jLabel1">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Dialog" size="18" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Appointment Booking for "/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="tFirstname">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Dialog" size="18" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="None"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="tLastname">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Dialog" size="18" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="None"/>
+      </Properties>
+    </Component>
+    <Component class="com.toedter.calendar.JDateChooser" name="tDate">
+      <Properties>
+        <Property name="dateFormatString" type="java.lang.String" value="y-M-d"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel2">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Date of Appointment"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="slot1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="09:00-09:30"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="slot7">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="01:30-02:00"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="slot13">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="06:00-06:30"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="slot2">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="09:30-10:00"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="slot8">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="02:00-02:30"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="slot8ActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="slot14">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="06:30-07:00"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="slot3">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="10:00-10:30"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="slot9">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="02:30-03:00"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="slot15">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="07:00-07:30"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="slot4">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="10:30-11:00"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="slot10">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="03:00-03:30"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="slot16">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="07:30-08:00"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="slot16ActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel3">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Id:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="idLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="None"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="slot5">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="11:00-11:30"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="slot11">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="03:30-04:00"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="slot17">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="08:00-08:30"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="slot6">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="11:30-12:00"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="slot12">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="04:00-04:30"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="slot18">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="08:30-09:00"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="insertButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Insert"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="insertButtonMouseClicked"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="deleteButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Delete"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="deleteButtonMouseClicked"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel4">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Doctor Id:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="tDoctor">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="None"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel6">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Patient Id:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="tPatient">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="None"/>
+      </Properties>
+    </Component>
+  </SubComponents>
+</Form>
