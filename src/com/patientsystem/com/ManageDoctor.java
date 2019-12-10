@@ -452,6 +452,8 @@ public class ManageDoctor extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Successfully created new doctor");
            
             DefaultTableModel model = (DefaultTableModel)docTable.getModel();
+            model.setRowCount(0);
+            displayDocs();
            
         } catch (Exception e) {
            JOptionPane.showMessageDialog(null, e);
@@ -472,6 +474,10 @@ public class ManageDoctor extends javax.swing.JFrame {
                 dc.update(Integer.parseInt(idLabel.getText()), specId, tFirstname.getText(), tMiddlename.getText(), tLastname.getText(), tGender.getSelectedItem().toString(), Integer.parseInt(tResidenceNumber.getText()), Integer.parseInt(tCellNumber.getText()), tAddress.getText(), tEmail.getText(), tUsername.getText(), String.valueOf(tPassword.getPassword()));
             
                 JOptionPane.showMessageDialog(null, "Successfully update table");
+                
+                DefaultTableModel model = (DefaultTableModel)docTable.getModel();
+                model.setRowCount(0);
+                displayDocs();
             
             } else {
                 JOptionPane.showMessageDialog(null, "Please select a doctor in the table");
@@ -492,6 +498,10 @@ public class ManageDoctor extends javax.swing.JFrame {
                 dc.delete(Integer.parseInt(idLabel.getText()));
             
                 JOptionPane.showMessageDialog(null, "Successfully deleted doctor");
+                
+                DefaultTableModel model = (DefaultTableModel)docTable.getModel();
+                model.setRowCount(0);
+                displayDocs();
             } else {
                 JOptionPane.showMessageDialog(null, "Please select a doctor in the table");
             }

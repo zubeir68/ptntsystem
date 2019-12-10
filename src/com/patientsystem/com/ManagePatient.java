@@ -332,7 +332,6 @@ public class ManagePatient extends javax.swing.JFrame {
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(idLabel)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jlabel34)
                             .addComponent(jLabel21, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -460,13 +459,14 @@ public class ManagePatient extends javax.swing.JFrame {
                         .addGap(38, 38, 38)
                         .addComponent(jLabel19)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(insertButton)
-                    .addComponent(updateButton)
-                    .addComponent(deleteButton)
-                    .addComponent(jButton1)
-                    .addComponent(resetButton)
-                    .addComponent(appointmentBook))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(appointmentBook, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(insertButton)
+                        .addComponent(updateButton)
+                        .addComponent(deleteButton)
+                        .addComponent(jButton1)
+                        .addComponent(resetButton)))
                 .addGap(39, 39, 39)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -539,6 +539,10 @@ public class ManagePatient extends javax.swing.JFrame {
             pc.create(tFirstname.getText(), tMiddlename.getText(), tLastname.getText(), sqlDate, tGender.getSelectedItem().toString(), Integer.parseInt(tResidenceNumber.getText()), Integer.parseInt(tCellNumber.getText()), tAddress.getText(), tEmail.getText(), tCity.getText(), tCountry.getText(), tHealthCardNumber.getText(), tInsured.getSelectedItem().toString(), tInsuranceType.getText(), tInsuranceName.getText(), tInsuranceNumber.getText(), Integer.parseInt(tDoctor.getSelectedItem().toString().substring(0, 1)));
             
             JOptionPane.showMessageDialog(null, "Successfully created new patient");
+            DefaultTableModel model = (DefaultTableModel)patTable.getModel();
+            model.setRowCount(0);
+            displayPat();
+            
             
             
         } catch(Exception e) {
@@ -557,6 +561,9 @@ public class ManagePatient extends javax.swing.JFrame {
                 
                 pc.update(Integer.parseInt(idLabel.getText()), tFirstname.getText(), tMiddlename.getText(), tLastname.getText(), sqlDate, tGender.getSelectedItem().toString(), Integer.parseInt(tResidenceNumber.getText()), Integer.parseInt(tCellNumber.getText()), tAddress.getText(), tEmail.getText(), tCity.getText(), tCountry.getText(), tHealthCardNumber.getText(), tInsured.getSelectedItem().toString(), tInsuranceType.getText(), tInsuranceName.getText(), tInsuranceNumber.getText(), Integer.parseInt(tDoctor.getSelectedItem().toString().substring(0, 1)));
                 JOptionPane.showMessageDialog(null, "Successfully update table");
+                DefaultTableModel model = (DefaultTableModel)patTable.getModel();
+                model.setRowCount(0);
+                displayPat();
                 
             } else {
                 JOptionPane.showMessageDialog(null, "Please select a row in the table");
@@ -575,6 +582,9 @@ public class ManagePatient extends javax.swing.JFrame {
                 pc.delete(Integer.parseInt(idLabel.getText()));
             
                 JOptionPane.showMessageDialog(null, "Successfully deleted doctor");
+                DefaultTableModel model = (DefaultTableModel)patTable.getModel();
+                model.setRowCount(0);
+                displayPat();
             } else {
                 JOptionPane.showMessageDialog(null, "Please select a row in the table");
             }

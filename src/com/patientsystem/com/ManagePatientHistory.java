@@ -399,6 +399,9 @@ public class ManagePatientHistory extends javax.swing.JFrame {
             Boolean task = phc.create(Integer.parseInt(patientId.getText()), tBloodGroup.getSelectedItem().toString(), tBloodSys.getText().toString(), tBloodDia.getText().toString() , Float.parseFloat(tHeight.getText()), Float.parseFloat(tWeight.getText()), tSymptoms.getText(), tMedTestPres.getText(), tDiagnosis.getText(), tPrescription.getText());
             if(task) {
                 JOptionPane.showMessageDialog(null, "Successfully created new history");
+                DefaultTableModel model = (DefaultTableModel)hisTable.getModel();
+                model.setRowCount(0);
+                displayDocs(Integer.parseInt(patientId.getText()));
             } else {
                 JOptionPane.showMessageDialog(null, "Something went wrong, please check all fields and try again");
             }
@@ -421,6 +424,10 @@ public class ManagePatientHistory extends javax.swing.JFrame {
             
             if(task) {
                 JOptionPane.showMessageDialog(null, "Successfully updated history");
+                DefaultTableModel model = (DefaultTableModel)hisTable.getModel();
+                model.setRowCount(0);
+                displayDocs(Integer.parseInt(patientId.getText()));
+                
             } else {
                 JOptionPane.showMessageDialog(null, "Something went wrong, please check all fields and try again");
             }
@@ -437,8 +444,10 @@ public class ManagePatientHistory extends javax.swing.JFrame {
             PatientHistoryController phc = new PatientHistoryController();
             
             phc.delete(Integer.parseInt(idLabel.getText()));
-                            JOptionPane.showMessageDialog(null, "Successfully deleted  history");
-
+            JOptionPane.showMessageDialog(null, "Successfully deleted  history");
+            DefaultTableModel model = (DefaultTableModel)hisTable.getModel();
+            model.setRowCount(0);
+            displayDocs(Integer.parseInt(patientId.getText()));
             
         } else {
             JOptionPane.showMessageDialog(null, "Please select row in table");

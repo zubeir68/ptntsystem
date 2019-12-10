@@ -317,7 +317,9 @@ public class ManageReceptionist extends javax.swing.JFrame {
             rc.create(tFirstname.getText(), tMiddlename.getText(), tLastname.getText(),  tAddress.getText(),  tEmail.getText(), tUsername.getText(), String.valueOf(tPassword.getPassword()), Integer.parseInt(tContactNumber.getText()));
             
             JOptionPane.showMessageDialog(null, "Successfully created new receptionist");
-            
+            DefaultTableModel model = (DefaultTableModel)recTable.getModel();
+            model.setRowCount(0);
+            displayRecs();
         } catch(Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
@@ -330,6 +332,9 @@ public class ManageReceptionist extends javax.swing.JFrame {
             ReceptionistController rc = new ReceptionistController();
             rc.update(Integer.parseInt(idLabel.getText()), tFirstname.getText(), tMiddlename.getText(), tLastname.getText(), tUsername.getText(), String.valueOf(tPassword.getPassword()), Integer.parseInt(tContactNumber.getText()), tEmail.getText(),  tAddress.getText());
             JOptionPane.showMessageDialog(null, "Successfully update table");
+            DefaultTableModel model = (DefaultTableModel)recTable.getModel();
+            model.setRowCount(0);
+            displayRecs();
             
         } catch(Exception e) {
             JOptionPane.showMessageDialog(null, e);
@@ -343,6 +348,9 @@ public class ManageReceptionist extends javax.swing.JFrame {
             ReceptionistController rc = new ReceptionistController();
             rc.delete(Integer.parseInt(idLabel.getText()));
             JOptionPane.showMessageDialog(null, "Successfully deleted doctor");
+            DefaultTableModel model = (DefaultTableModel)recTable.getModel();
+            model.setRowCount(0);
+            displayRecs();
         } catch(Exception e) {
             JOptionPane.showMessageDialog(null, e);
             System.out.println(e);

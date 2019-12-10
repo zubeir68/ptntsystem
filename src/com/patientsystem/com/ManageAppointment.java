@@ -427,6 +427,9 @@ public class ManageAppointment extends javax.swing.JFrame {
             
                 if(task) {
                     JOptionPane.showMessageDialog(null, "Successfully created new appointment");
+                    DefaultTableModel model = (DefaultTableModel)appTable.getModel();
+                    model.setRowCount(0);
+                    displayApp(Integer.parseInt(tPatient.getText()));
                 } else {
                     JOptionPane.showMessageDialog(null, "Something went wrong, please check all fields and try again");
                 }
@@ -455,6 +458,9 @@ public class ManageAppointment extends javax.swing.JFrame {
                 dc.delete(Integer.parseInt(idLabel.getText()));
             
                 JOptionPane.showMessageDialog(null, "Successfully deleted appointment");
+                DefaultTableModel model = (DefaultTableModel)appTable.getModel();
+                model.setRowCount(0);
+                displayApp(Integer.parseInt(tPatient.getText()));
             } else {
                 JOptionPane.showMessageDialog(null, "Please select a appointment in the table");
             }
