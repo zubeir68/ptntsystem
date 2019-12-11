@@ -5,9 +5,14 @@
  */
 package com.patientsystem.com;
 
+import com.patientsystem.com.Controller.AppointmentController;
+import com.patientsystem.com.Controller.DoctorController;
+import com.patientsystem.com.Model.Appointment;
 import java.sql.Connection;
 import java.sql.Statement;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -21,6 +26,30 @@ public class DoctorMain extends javax.swing.JFrame {
     public DoctorMain(String username) {
         initComponents();
         tUsername.setText(username);
+        DoctorController dc = new DoctorController(); 
+        int id = dc.getByUsername(tUsername.getText());
+        displayApp(id);
+    }
+    
+    public void displayApp(int id) {
+        AppointmentController app = new AppointmentController();
+        
+        ArrayList<Appointment> list = app.getByDoctor(id);
+        DefaultTableModel model = (DefaultTableModel)appTable.getModel();
+        Object[] row = new Object[6];
+        DoctorController dc = new DoctorController();
+        
+        for(int i = 0; i < list.size(); i++) {
+            
+            row[0] = list.get(i).getId();
+            row[1] = dc.getOneDoctor(list.get(i).getDoctor());
+            row[2] = list.get(i).getPatient();
+            row[3] = list.get(i).getAppDate();
+            row[4] = list.get(i).getStartTime();
+            row[5] = list.get(i).getEndTime();
+            
+            model.addRow(row);
+        }
     }
 
     /**
@@ -39,6 +68,8 @@ public class DoctorMain extends javax.swing.JFrame {
         tUsername = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         tPassword = new javax.swing.JPasswordField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        appTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -65,6 +96,24 @@ public class DoctorMain extends javax.swing.JFrame {
 
         jLabel3.setText("Change Password");
 
+        appTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Id", "Doctor", "Patient", "Date", "Start", "End"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, true, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(appTable);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -72,7 +121,6 @@ public class DoctorMain extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(45, 45, 45)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(updatePassword)
                     .addComponent(jLabel1)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(patientButton)
@@ -80,10 +128,15 @@ public class DoctorMain extends javax.swing.JFrame {
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(tUsername))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(tPassword, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(120, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(updatePassword)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(tPassword, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 951, Short.MAX_VALUE)))
+                .addGap(12, 12, 12))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -95,13 +148,19 @@ public class DoctorMain extends javax.swing.JFrame {
                     .addComponent(patientButton)
                     .addComponent(jLabel2)
                     .addComponent(tUsername))
-                .addGap(54, 54, 54)
-                .addComponent(jLabel3)
-                .addGap(28, 28, 28)
-                .addComponent(tPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(updatePassword)
-                .addContainerGap(163, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(54, 54, 54)
+                        .addComponent(jLabel3)
+                        .addGap(28, 28, 28)
+                        .addComponent(tPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(updatePassword)
+                        .addContainerGap(163, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
 
         pack();
@@ -167,9 +226,11 @@ public class DoctorMain extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable appTable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton patientButton;
     private javax.swing.JPasswordField tPassword;
     private javax.swing.JLabel tUsername;

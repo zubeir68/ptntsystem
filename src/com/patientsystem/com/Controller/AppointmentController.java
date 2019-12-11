@@ -55,6 +55,36 @@ public class AppointmentController {
         return appList;
     }
     
+    public ArrayList<Appointment> getByDoctor(int id) {
+        
+        ArrayList<Appointment> appList = new ArrayList<Appointment>();
+        DbConnection db = new DbConnection();
+        Connection connection = db.get_connection();
+        
+        Statement st;
+        ResultSet rs;
+        String query = String.format("SELECT * FROM appointment WHERE Doctor_id = %d ORDER BY App_Date, Start_Time", id);
+        try {
+            st = connection.createStatement();
+            rs = st.executeQuery(query);
+            Appointment appointment;
+            
+            while(rs.next()) {
+                appointment = new Appointment(rs.getInt("Appointment_id"), rs.getInt("Doctor_id"), rs.getInt("Patient_id"), rs.getDate("App_Date").toString(), rs.getTime("Start_Time").toString(), rs.getTime("End_Time").toString());
+                
+                appList.add(appointment);
+                
+            }
+            
+            
+            
+        } catch(Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        
+        return appList;
+    }
+    
     public Boolean create(int doctorId, int patientId, String appDate, String slot) {
         try{
             DbConnection db = new DbConnection();
@@ -110,7 +140,7 @@ public class AppointmentController {
             Time startTime = Time.valueOf(st);
             Time endTime = Time.valueOf(et);
             
-            String query = String.format("select * from appointment where Patient_id = %d and App_Date = '%s' and Start_Time = '%s'", id, sqlDate.toString(), startTime.toString());
+            String query = String.format("select * from appointment where Doctor_id = %d and App_Date = '%s' and Start_Time = '%s'", id, sqlDate.toString(), startTime.toString());
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             
@@ -125,5 +155,7 @@ public class AppointmentController {
             return false;
         }
     }
+    
+    
     
 }

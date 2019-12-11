@@ -12,5 +12,6 @@
 	<classpathentry kind="lib" path="/snap/eclipse/40/plugins/org.eclipse.e4.ui.workbench.swt_0.14.500.v20190214-0851.jar"/>
 	<classpathentry kind="lib" path="/snap/eclipse/40/plugins/org.eclipse.swt.gtk.linux.x86_64_3.110.0.v20190305-0602.jar"/>
 	<classpathentry kind="lib" path="/snap/eclipse/40/plugins/org.eclipse.swt_3.110.0.v20190305-0602.jar"/>
+	<classpathentry kind="lib" path="/home/zumo/jcalendar-1.4.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

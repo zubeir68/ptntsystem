@@ -422,7 +422,7 @@ public class ManageAppointment extends javax.swing.JFrame {
             AppointmentController ac = new AppointmentController();
             SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
             
-            if(ac.timeSlotAvailable(Integer.parseInt(tPatient.getText()), DATE_FORMAT.format(tDate.getDate()).toString(), slot)) {
+            if(ac.timeSlotAvailable(Integer.parseInt(tDoctor.getText().substring(0, 1)), DATE_FORMAT.format(tDate.getDate()).toString(), slot)) {
                 Boolean task = ac.create(Integer.parseInt(tDoctor.getText().substring(0, 1)), Integer.parseInt(tPatient.getText()), DATE_FORMAT.format(tDate.getDate()).toString(), slot);
             
                 if(task) {

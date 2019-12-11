@@ -166,4 +166,25 @@ public class DoctorController {
             return null;
         }
     }
+
+    public int getByUsername(String username) {
+        try {
+            DbConnection db = new DbConnection();
+            Connection connection = db.get_connection();
+            Statement st;
+            ResultSet rs;
+            String query = String.format("select Doctor_id from doctor where User_Name = '%s'", username);
+            
+            st = connection.createStatement();
+            rs = st.executeQuery(query);
+            if(rs.next()) {
+                return rs.getInt("Doctor_id");
+            }
+            return 0;
+            
+        } catch(Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
 }
