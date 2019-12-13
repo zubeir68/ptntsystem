@@ -188,6 +188,11 @@ public class ManagePatientHistory extends javax.swing.JFrame {
         });
 
         jButton4.setText("Reset Fields");
+        jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton4MouseClicked(evt);
+            }
+        });
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
@@ -453,6 +458,19 @@ public class ManagePatientHistory extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Please select row in table");
         }
     }//GEN-LAST:event_deleteButtonMouseClicked
+
+    private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
+        // TODO add your handling code here:
+        idLabel.setText("None");
+        tBloodSys.setText("");
+        tBloodDia.setText("");
+        tHeight.setText("");
+        tWeight.setText("");
+        tSymptoms.setText("");
+        tMedTestPres.setText("");
+        tDiagnosis.setText("");
+        tPrescription.setText("");
+    }//GEN-LAST:event_jButton4MouseClicked
 
     /**
      * @param args the command line arguments
