@@ -36,7 +36,7 @@ public class PatientController {
             Patient patient;
             
             while(rs.next()) {
-                patient = new Patient(rs.getInt("Patient_Id"), rs.getString("First_Name"), rs.getString("Middle_Name"), rs.getString("Last_Name"), rs.getDate("Date_Of_Birth").toString(), rs.getString("Gender"), rs.getInt("Residence_Number"), rs.getInt("Cell_Number"), rs.getString("Address"), rs.getString("Email"), rs.getString("City"), rs.getString("Country"), rs.getString("Health_Card_Number"), rs.getString("Insured_Or_Not"), rs.getString("Insurance_Type"), rs.getString("Insurance_Name"), rs.getString("Insurance_Number"), rs.getDate("Date_Of_Registration").toString(), rs.getInt("Doctor_id"));
+                patient = new Patient(rs.getInt("Patient_Id"), rs.getString("First_Name"), rs.getString("Middle_Name"), rs.getString("Last_Name"), rs.getDate("Date_Of_Birth").toString(), rs.getString("Gender"), rs.getInt("Residence_Number"), rs.getInt("Cell_Number"), rs.getString("Address"), rs.getString("Email"), rs.getString("City"), rs.getString("Health_Card_Number"), rs.getString("Insured_Or_Not"), rs.getString("Insurance_Type"), rs.getString("Insurance_Name"), rs.getString("Insurance_Number"), rs.getDate("Date_Of_Registration").toString(), rs.getInt("Doctor_id"));
                 
                 patList.add(patient);
                 
@@ -51,9 +51,9 @@ public class PatientController {
         return patList;
     }
     
-    public void create(String firstname, String middlename, String lastname, Date dateOfBirth, String gender, int residenceNumber, int cellNumber, String address, String email, String city, String country, String healthCardNumber, String insured, String insuranceType, String insuranceName, String insuranceNumber, int doctorId) {
+    public void create(String firstname, String middlename, String lastname, Date dateOfBirth, String gender, int residenceNumber, int cellNumber, String address, String email, String city, String healthCardNumber, String insured, String insuranceType, String insuranceName, String insuranceNumber, int doctorId) {
         
-        String query = "insert into patient (First_Name, Middle_Name, Last_Name, Date_Of_Birth, Gender, Residence_Number, Cell_Number, Address, Email, City, Country, Health_Card_Number, Insured_Or_Not, Insurance_Type, Insurance_Name, Insurance_Number, Date_Of_Registration, Doctor_id) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String query = "insert into patient (First_Name, Middle_Name, Last_Name, Date_Of_Birth, Gender, Residence_Number, Cell_Number, Address, Email, City, Health_Card_Number, Insured_Or_Not, Insurance_Type, Insurance_Name, Insurance_Number, Date_Of_Registration, Doctor_id) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         
         try { 
             DbConnection db = new DbConnection();
@@ -71,14 +71,13 @@ public class PatientController {
             pst.setString(8, address);
             pst.setString(9, email);
             pst.setString(10, city);
-            pst.setString(11, country);
-            pst.setString(12, healthCardNumber);
-            pst.setString(13, insured);
-            pst.setString(14, insuranceType);
-            pst.setString(15, insuranceName);
-            pst.setString(16, insuranceNumber);
-            pst.setDate(17, date);
-            pst.setInt(18, doctorId);
+            pst.setString(11, healthCardNumber);
+            pst.setString(12, insured);
+            pst.setString(13, insuranceType);
+            pst.setString(14, insuranceName);
+            pst.setString(15, insuranceNumber);
+            pst.setDate(16, date);
+            pst.setInt(17, doctorId);
             
             pst.execute();
             
@@ -89,9 +88,9 @@ public class PatientController {
         
     }
     
-    public void update(int id, String firstname, String middlename, String lastname, Date dateOfBirth, String gender, int residenceNumber, int cellNumber, String address, String email, String city, String country, String healthCardNumber, String insured, String insuranceType, String insuranceName, String insuranceNumber, int doctorId) {
+    public void update(int id, String firstname, String middlename, String lastname, Date dateOfBirth, String gender, int residenceNumber, int cellNumber, String address, String email, String city,  String healthCardNumber, String insured, String insuranceType, String insuranceName, String insuranceNumber, int doctorId) {
         try {
-            String query = "update patient set First_Name = ?, Middle_Name = ?, Last_Name = ?, Date_of_Birth = ?, Gender = ?, Residence_Number = ?, Cell_Number = ?, Address = ?, Email = ?, City = ?, Country = ?, Health_Card_Number = ?, Insured_Or_Not = ?, Insurance_Type = ?, Insurance_Name = ?, Insurance_Number = ?, Doctor_id = ? where Patient_id = ?";
+            String query = "update patient set First_Name = ?, Middle_Name = ?, Last_Name = ?, Date_of_Birth = ?, Gender = ?, Residence_Number = ?, Cell_Number = ?, Address = ?, Email = ?, City = ?, Health_Card_Number = ?, Insured_Or_Not = ?, Insurance_Type = ?, Insurance_Name = ?, Insurance_Number = ?, Doctor_id = ? where Patient_id = ?";
             
             DbConnection db = new DbConnection();
             Connection connection = db.get_connection();
@@ -108,14 +107,13 @@ public class PatientController {
             pst.setString(8, address);
             pst.setString(9, email);
             pst.setString(10, city);
-            pst.setString(11, country);
-            pst.setString(12, healthCardNumber);
-            pst.setString(13, insured);
-            pst.setString(14, insuranceType);
-            pst.setString(15, insuranceName);
-            pst.setString(16, insuranceNumber);
-            pst.setInt(17, doctorId);
-            pst.setInt(18, id);
+            pst.setString(11, healthCardNumber);
+            pst.setString(12, insured);
+            pst.setString(13, insuranceType);
+            pst.setString(14, insuranceName);
+            pst.setString(15, insuranceNumber);
+            pst.setInt(16, doctorId);
+            pst.setInt(17, id);
             
             pst.execute();
             
