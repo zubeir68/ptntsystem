@@ -202,12 +202,12 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel5">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Enter Password: "/>
+        <Property name="text" type="java.lang.String" value="Enter new password:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel6">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Enter Password Again:"/>
+        <Property name="text" type="java.lang.String" value="Confirm new password:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JPasswordField" name="tSecondPassword">

@@ -84,7 +84,7 @@ public class ReceptionistMain extends javax.swing.JFrame {
 
         jLabel5.setText("Enter new password:");
 
-        jLabel6.setText("Enter second password:");
+        jLabel6.setText("Confirm new password:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

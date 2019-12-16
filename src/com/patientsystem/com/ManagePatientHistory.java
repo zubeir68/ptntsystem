@@ -21,13 +21,14 @@ public class ManagePatientHistory extends javax.swing.JFrame {
     /**
      * Creates new form ManagePatientHistory
      */
-    public ManagePatientHistory(int id, String firstname, String lastname, String subject) {
+    public ManagePatientHistory(int id, String firstname, String lastname, String subject, String username) {
         initComponents();
         displayDocs(id);
         tFirstname.setText(firstname);
         tLastname.setText(lastname);
         patientId.setText(String.valueOf(id));
         tSubject.setText(subject);
+        tLoggedInUsername.setText(username);
         if(subject == "Receptionist") {
             insertButton.setEnabled(false);
             updateButton.setEnabled(false);
@@ -575,7 +576,7 @@ public class ManagePatientHistory extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ManagePatientHistory(0, "None", "None", "None").setVisible(true);
+                new ManagePatientHistory(0, "None", "None", "None", "None").setVisible(true);
             }
         });
     }

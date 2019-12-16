@@ -106,9 +106,9 @@ public class AdminMain extends javax.swing.JFrame {
 
         jLabel4.setText("Current Password: ");
 
-        jLabel5.setText("Enter Password: ");
+        jLabel5.setText("Enter new password:");
 
-        jLabel6.setText("Enter Password Again:");
+        jLabel6.setText("Confirm new password:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -212,7 +212,7 @@ public class AdminMain extends javax.swing.JFrame {
                 tCurrent.setText("");
                  
             }  else {
-                    JOptionPane.showMessageDialog(null, "Please check all fields and try again");
+                JOptionPane.showMessageDialog(null, "Please check all fields and try again");
             }
             
         } catch(Exception e) {

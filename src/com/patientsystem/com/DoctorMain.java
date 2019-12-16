@@ -128,7 +128,7 @@ public class DoctorMain extends javax.swing.JFrame {
             }
         });
 
-        jLabel4.setText("Enter again:");
+        jLabel4.setText("Confirm new:");
 
         jLabel5.setText("Enter new:");
 
