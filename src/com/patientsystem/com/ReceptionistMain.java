@@ -6,6 +6,7 @@
 package com.patientsystem.com;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 
@@ -40,6 +41,11 @@ public class ReceptionistMain extends javax.swing.JFrame {
         tPassword = new javax.swing.JPasswordField();
         updateButton = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        tSecondPassword = new javax.swing.JPasswordField();
+        tCurrent = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -57,6 +63,7 @@ public class ReceptionistMain extends javax.swing.JFrame {
 
         tUsername.setText("None");
 
+        jLabel4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel4.setText("Change Password");
 
         updateButton.setText("Update");
@@ -72,6 +79,12 @@ public class ReceptionistMain extends javax.swing.JFrame {
                 jButton1MouseClicked(evt);
             }
         });
+
+        jLabel3.setText("Enter current password: ");
+
+        jLabel5.setText("Enter new password:");
+
+        jLabel6.setText("Enter second password:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -95,9 +108,17 @@ public class ReceptionistMain extends javax.swing.JFrame {
                         .addGap(14, 14, 14)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(updateButton)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(tPassword)))))
+                            .addComponent(jLabel4)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel3))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(tPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
+                                    .addComponent(tSecondPassword)
+                                    .addComponent(tCurrent))))))
                 .addContainerGap(275, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -118,26 +139,52 @@ public class ReceptionistMain extends javax.swing.JFrame {
                 .addGap(32, 32, 32)
                 .addComponent(jLabel4)
                 .addGap(18, 18, 18)
-                .addComponent(tPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(tCurrent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(tPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(74, 74, 74))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6)
+                            .addComponent(tSecondPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(32, 32, 32)))
                 .addComponent(updateButton)
-                .addContainerGap(173, Short.MAX_VALUE))
+                .addGap(83, 83, 83))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void updateButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateButtonMouseClicked
-        // TODO add your handling code here:
+         // TODO add your handling code here:
         try{
             DbConnection db = new DbConnection();
             Connection connection = db.get_connection();
-            String query = String.format("update receptionist set Password = '%s' where User_Name = '%s'", new String(tPassword.getPassword()), tUsername.getText());
-            Statement st = connection.createStatement();
-            st.executeUpdate(query);
             
-            JOptionPane.showMessageDialog(null, "Updated Password");
-            tPassword.setText("");
+            // First get Password by Username
+            String queryPassword = String.format("select Password from receptionist where User_Name = '%s'", tUsername.getText());
+            Statement st1 = connection.createStatement();
+            ResultSet rs = st1.executeQuery(queryPassword);
+            if(rs.next() && new String(tCurrent.getPassword()).equals(rs.getString("Password")) && new String(tPassword.getPassword()).equals(new String(tSecondPassword.getPassword()))) {
+                // After check, update password
+                String query = String.format("update receptionist set Password = '%s' where User_Name = '%s'", new String(tPassword.getPassword()), tUsername.getText());
+                Statement st2 = connection.createStatement();
+                st2.executeUpdate(query);
+            
+                JOptionPane.showMessageDialog(null, "Updated Password");
+                tPassword.setText("");
+                tSecondPassword.setText("");
+                tCurrent.setText("");
+                 
+            }  else {
+                    JOptionPane.showMessageDialog(null, "Please check all fields and try again");
+            }
             
         } catch(Exception e) {
             e.printStackTrace();
@@ -148,7 +195,7 @@ public class ReceptionistMain extends javax.swing.JFrame {
     private void showPatientMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_showPatientMouseClicked
         // TODO add your handling code here:
         this.dispose();
-        new ManagePatient().setVisible(true);
+        new ManagePatient("Receptionist", tUsername.getText()).setVisible(true);
     }//GEN-LAST:event_showPatientMouseClicked
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
@@ -197,9 +244,14 @@ public class ReceptionistMain extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JButton showPatient;
+    private javax.swing.JPasswordField tCurrent;
     private javax.swing.JPasswordField tPassword;
+    private javax.swing.JPasswordField tSecondPassword;
     private javax.swing.JLabel tUsername;
     private javax.swing.JButton updateButton;
     // End of variables declaration//GEN-END:variables

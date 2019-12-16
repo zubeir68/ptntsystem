@@ -21,9 +21,11 @@ public class ManageSpeciality extends javax.swing.JFrame {
     /**
      * Creates new form ManageSpeciality
      */
-    public ManageSpeciality() {
+    public ManageSpeciality(String subject, String username) {
         initComponents();
         displayDocs();
+        tSubject.setText(subject);
+        tLoggedInUsername.setText(username);
     }
     
     public void displayDocs() {
@@ -65,6 +67,10 @@ public class ManageSpeciality extends javax.swing.JFrame {
         deleteButton = new javax.swing.JButton();
         resetButton = new javax.swing.JButton();
         homeButton = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        tSubject = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        tLoggedInUsername = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -148,6 +154,14 @@ public class ManageSpeciality extends javax.swing.JFrame {
             }
         });
 
+        jLabel5.setText("Logged in as: ");
+
+        tSubject.setText("None");
+
+        jLabel7.setText("Username:");
+
+        tLoggedInUsername.setText("None");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -165,7 +179,16 @@ public class ManageSpeciality extends javax.swing.JFrame {
                                 .addComponent(idLabel)
                                 .addGap(66, 66, 66)
                                 .addComponent(homeButton))
-                            .addComponent(jLabel1)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(65, 65, 65)
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(tSubject)
+                                .addGap(39, 39, 39)
+                                .addComponent(jLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(tLoggedInUsername))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addGap(321, 321, 321)
@@ -189,7 +212,12 @@ public class ManageSpeciality extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addComponent(jLabel1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel5)
+                    .addComponent(tSubject)
+                    .addComponent(jLabel7)
+                    .addComponent(tLoggedInUsername))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -307,8 +335,9 @@ public class ManageSpeciality extends javax.swing.JFrame {
     private void homeButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homeButtonMouseClicked
         // TODO add your handling code here:
         this.dispose();
-        Main main = new Main();
-        main.openFrame();
+        if(tSubject.getText() == "Admin") {
+            new AdminMain(tLoggedInUsername.getText()).setVisible(true);
+        }
     }//GEN-LAST:event_homeButtonMouseClicked
 
     /**
@@ -341,7 +370,7 @@ public class ManageSpeciality extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ManageSpeciality().setVisible(true);
+                new ManageSpeciality("None", "None").setVisible(true);
             }
         });
     }
@@ -355,11 +384,15 @@ public class ManageSpeciality extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton resetButton;
     private javax.swing.JTable specTable;
     private java.awt.TextArea tDescription;
+    private javax.swing.JLabel tLoggedInUsername;
     private java.awt.TextField tName;
+    private javax.swing.JLabel tSubject;
     private javax.swing.JButton updateButton;
     // End of variables declaration//GEN-END:variables
 }

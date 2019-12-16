@@ -24,6 +24,7 @@ public class Login {
         JLabel error = new JLabel();
         JLabel usernameLabel = new JLabel("Username");
         JLabel passwordLabel = new JLabel("Password");
+        JButton backbutton = new JButton("Home");
 
         //Settings
 
@@ -59,14 +60,22 @@ public class Login {
                     }
                 } else {
                    JOptionPane.showMessageDialog(null, "Username or Password is wrong");
-                   textField1.setText("");
                    passwordField1.setText("");
                 }
+            }
+        });
+        
+        backbutton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                fLogin.dispose();
+                new Main().openFrame();
             }
         });
 
 
         //Finishing
+        panel.add(backbutton);
         panel.add(usernameLabel);
         panel.add(textField1);
         panel.add(passwordLabel);

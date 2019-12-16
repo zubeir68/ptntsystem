@@ -25,10 +25,12 @@ public class ManagePatient extends javax.swing.JFrame {
     /**
      * Creates new form ManagePatient
      */
-    public ManagePatient() {
+    public ManagePatient(String subject, String username) {
         initComponents();
         displayPat();
         displayDoctors();
+        tSubject.setText(subject);
+        tLoggedInUsername.setText(username);
     }
     
     public void displayPat() {
@@ -126,9 +128,12 @@ public class ManagePatient extends javax.swing.JFrame {
         resetButton = new javax.swing.JButton();
         appointmentBook = new javax.swing.JButton();
         homeButton = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        tSubject = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        tLoggedInUsername = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(2000, 639));
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel1.setText("Patient Manager");
@@ -274,6 +279,14 @@ public class ManagePatient extends javax.swing.JFrame {
             }
         });
 
+        jLabel3.setText("Logged in as:");
+
+        tSubject.setText("None");
+
+        jLabel20.setText("Username:");
+
+        tLoggedInUsername.setText("None");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -338,41 +351,51 @@ public class ManagePatient extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(layout.createSequentialGroup()
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                    .addComponent(tResidenceNumber, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                    .addComponent(tCity, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                    .addComponent(tMiddlename, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                    .addComponent(jLabel6)
-                                                    .addComponent(jLabel10)
-                                                    .addComponent(jlabel34))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                        .addComponent(tCellNumber, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                        .addComponent(tHealthCardNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                    .addComponent(tLastname, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addGap(41, 41, 41)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                    .addComponent(jLabel7)
-                                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(jLabel16)
-                                                        .addComponent(jLabel11))))
+                                                    .addGroup(layout.createSequentialGroup()
+                                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                            .addComponent(tResidenceNumber, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                            .addComponent(tCity, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                            .addComponent(tMiddlename, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                            .addComponent(jLabel6)
+                                                            .addComponent(jLabel10)
+                                                            .addComponent(jlabel34))
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                                .addComponent(tCellNumber, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                                .addComponent(tHealthCardNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                            .addComponent(tLastname, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                        .addGap(41, 41, 41)
+                                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                            .addComponent(jLabel7)
+                                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                                .addComponent(jLabel16)
+                                                                .addComponent(jLabel11))))
+                                                    .addGroup(layout.createSequentialGroup()
+                                                        .addComponent(tInsuranceNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addGap(108, 108, 108)
+                                                        .addComponent(jLabel21)
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                        .addComponent(tDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                        .addComponent(jLabel17)
+                                                        .addGap(3, 3, 3)))
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(tDateOfBirth, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(tAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(tInsured, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(tInsuranceType, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                             .addGroup(layout.createSequentialGroup()
-                                                .addComponent(tInsuranceNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(108, 108, 108)
-                                                .addComponent(jLabel21)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(tDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                .addComponent(jLabel17)
-                                                .addGap(3, 3, 3)))
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(tDateOfBirth, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(tAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(tInsured, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(tInsuranceType, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                                .addComponent(jLabel3)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(tSubject)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(jLabel20)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(tLoggedInUsername)))))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel15)
                         .addGap(97, 97, 97))))
@@ -385,7 +408,11 @@ public class ManagePatient extends javax.swing.JFrame {
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
                     .addComponent(idLabel)
-                    .addComponent(homeButton))
+                    .addComponent(homeButton)
+                    .addComponent(jLabel3)
+                    .addComponent(tSubject)
+                    .addComponent(jLabel20)
+                    .addComponent(tLoggedInUsername))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -609,7 +636,7 @@ public class ManagePatient extends javax.swing.JFrame {
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         // TODO add your handling code here:
         if(idLabel.getText() != "None") {
-            new ManagePatientHistory(Integer.parseInt(idLabel.getText()), tFirstname.getText(), tLastname.getText()).setVisible(true);
+            new ManagePatientHistory(Integer.parseInt(idLabel.getText()), tFirstname.getText(), tLastname.getText(), tSubject.getText()).setVisible(true);
         } else {
             JOptionPane.showMessageDialog(null, "Please select a row in the table");
         }
@@ -631,8 +658,17 @@ public class ManagePatient extends javax.swing.JFrame {
     private void homeButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homeButtonMouseClicked
         // TODO add your handling code here:
         this.dispose();
-        Main main = new Main();
-        main.openFrame();
+        if(tSubject.getText() == "Admin") {
+            new AdminMain(tLoggedInUsername.getText()).setVisible(true);
+        }
+        
+        if(tSubject.getText() == "Doctor") {
+            new DoctorMain(tLoggedInUsername.getText()).setVisible(true);
+        }
+        
+        if(tSubject.getText() == "Receptionist") {
+            new ReceptionistMain(tLoggedInUsername.getText()).setVisible(true);
+        }
     }//GEN-LAST:event_homeButtonMouseClicked
 
     private void tCellNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tCellNumberActionPerformed
@@ -669,7 +705,7 @@ public class ManagePatient extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ManagePatient().setVisible(true);
+                new ManagePatient("None","None").setVisible(true);
             }
         });
     }
@@ -692,7 +728,9 @@ public class ManagePatient extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -717,8 +755,10 @@ public class ManagePatient extends javax.swing.JFrame {
     private java.awt.TextField tInsuranceType;
     private javax.swing.JComboBox<String> tInsured;
     private java.awt.TextField tLastname;
+    private javax.swing.JLabel tLoggedInUsername;
     private java.awt.TextField tMiddlename;
     private java.awt.TextField tResidenceNumber;
+    private javax.swing.JLabel tSubject;
     private javax.swing.JButton updateButton;
     // End of variables declaration//GEN-END:variables
 }

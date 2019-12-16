@@ -9,6 +9,7 @@ import com.patientsystem.com.Controller.AppointmentController;
 import com.patientsystem.com.Controller.DoctorController;
 import com.patientsystem.com.Model.Appointment;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -71,6 +72,11 @@ public class DoctorMain extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         appTable = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        tSecondPassword = new javax.swing.JPasswordField();
+        jLabel5 = new javax.swing.JLabel();
+        tCurrent = new javax.swing.JPasswordField();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -122,6 +128,12 @@ public class DoctorMain extends javax.swing.JFrame {
             }
         });
 
+        jLabel4.setText("Enter again:");
+
+        jLabel5.setText("Enter new:");
+
+        jLabel6.setText("Enter current:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -131,10 +143,15 @@ public class DoctorMain extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(updatePassword)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(tPassword, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(updatePassword)
+                                .addComponent(tPassword)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel4)
+                                .addComponent(tSecondPassword, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel5)
+                                .addComponent(tCurrent, javax.swing.GroupLayout.Alignment.TRAILING))
+                            .addComponent(jLabel6))
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 951, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
@@ -163,19 +180,29 @@ public class DoctorMain extends javax.swing.JFrame {
                     .addComponent(patientButton)
                     .addComponent(jLabel2)
                     .addComponent(tUsername))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(54, 54, 54)
+                        .addGap(36, 36, 36)
                         .addComponent(jLabel3)
-                        .addGap(28, 28, 28)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tCurrent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(tPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(updatePassword)
-                        .addContainerGap(163, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addContainerGap())))
+                        .addComponent(tSecondPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27)
+                        .addComponent(updatePassword)
+                        .addGap(18, 18, 18))))
         );
 
         pack();
@@ -186,12 +213,25 @@ public class DoctorMain extends javax.swing.JFrame {
         try{
             DbConnection db = new DbConnection();
             Connection connection = db.get_connection();
-            String query = String.format("update doctor set Password = '%s' where User_Name = '%s'", new String(tPassword.getPassword()), tUsername.getText());
-            Statement st = connection.createStatement();
-            st.executeUpdate(query);
             
-            JOptionPane.showMessageDialog(null, "Updated Password");
-            tPassword.setText("");
+            // First get Password by Username
+            String queryPassword = String.format("select Password from doctor where User_Name = '%s'", tUsername.getText());
+            Statement st1 = connection.createStatement();
+            ResultSet rs = st1.executeQuery(queryPassword);
+            if(rs.next() && new String(tCurrent.getPassword()).equals(rs.getString("Password")) && new String(tPassword.getPassword()).equals(new String(tSecondPassword.getPassword()))) {
+                // After check, update password
+                String query = String.format("update doctor set Password = '%s' where User_Name = '%s'", new String(tPassword.getPassword()), tUsername.getText());
+                Statement st2 = connection.createStatement();
+                st2.executeUpdate(query);
+            
+                JOptionPane.showMessageDialog(null, "Updated Password");
+                tPassword.setText("");
+                tSecondPassword.setText("");
+                tCurrent.setText("");
+                 
+            }  else {
+                    JOptionPane.showMessageDialog(null, "Please check all fields and try again");
+            }
             
         } catch(Exception e) {
             e.printStackTrace();
@@ -202,7 +242,7 @@ public class DoctorMain extends javax.swing.JFrame {
     private void patientButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_patientButtonMouseClicked
         // TODO add your handling code here:
         this.dispose();
-        new ManagePatient().setVisible(true);
+        new ManagePatient("Doctor", tUsername.getText()).setVisible(true);
     }//GEN-LAST:event_patientButtonMouseClicked
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
@@ -252,9 +292,14 @@ public class DoctorMain extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton patientButton;
+    private javax.swing.JPasswordField tCurrent;
     private javax.swing.JPasswordField tPassword;
+    private javax.swing.JPasswordField tSecondPassword;
     private javax.swing.JLabel tUsername;
     private javax.swing.JButton updatePassword;
     // End of variables declaration//GEN-END:variables

@@ -6,6 +6,7 @@
 package com.patientsystem.com;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 
@@ -43,6 +44,11 @@ public class AdminMain extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         tUsername = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        tCurrent = new javax.swing.JPasswordField();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        tSecondPassword = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -74,6 +80,7 @@ public class AdminMain extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel1.setText("Change Password");
 
         updateButton.setText("Update");
@@ -97,18 +104,20 @@ public class AdminMain extends javax.swing.JFrame {
             }
         });
 
+        jLabel4.setText("Current Password: ");
+
+        jLabel5.setText("Enter Password: ");
+
+        jLabel6.setText("Enter Password Again:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(49, 49, 49)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(updateButton)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(tPassword, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(49, 49, 49)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(doc, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -126,7 +135,22 @@ public class AdminMain extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(tUsername)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton1)))))
+                                .addComponent(jButton1))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(updateButton)
+                            .addComponent(jLabel6)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel1))
+                                .addGap(35, 35, 35)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(tPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
+                                    .addComponent(tSecondPassword)
+                                    .addComponent(tCurrent))))))
                 .addContainerGap(297, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -144,13 +168,23 @@ public class AdminMain extends javax.swing.JFrame {
                     .addComponent(jButton2)
                     .addComponent(jButton3)
                     .addComponent(jButton4))
-                .addGap(40, 40, 40)
+                .addGap(36, 36, 36)
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(tPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(tCurrent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
                 .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(tSecondPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(34, 34, 34)
                 .addComponent(updateButton)
-                .addContainerGap(220, Short.MAX_VALUE))
+                .addContainerGap(108, Short.MAX_VALUE))
         );
 
         pack();
@@ -161,12 +195,25 @@ public class AdminMain extends javax.swing.JFrame {
         try{
             DbConnection db = new DbConnection();
             Connection connection = db.get_connection();
-            String query = String.format("update admin set Password = '%s' where User_Name = '%s'", new String(tPassword.getPassword()), tUsername.getText());
-            Statement st = connection.createStatement();
-            st.executeUpdate(query);
             
-            JOptionPane.showMessageDialog(null, "Updated Password");
-            tPassword.setText("");
+            // First get Password by Username
+            String queryPassword = String.format("select Password from admin where User_Name = '%s'", tUsername.getText());
+            Statement st1 = connection.createStatement();
+            ResultSet rs = st1.executeQuery(queryPassword);
+            if(rs.next() && new String(tCurrent.getPassword()).equals(rs.getString("Password")) && new String(tPassword.getPassword()).equals(new String(tSecondPassword.getPassword()))) {
+                // After check, update password
+                String query = String.format("update admin set Password = '%s' where User_Name = '%s'", new String(tPassword.getPassword()), tUsername.getText());
+                Statement st2 = connection.createStatement();
+                st2.executeUpdate(query);
+            
+                JOptionPane.showMessageDialog(null, "Updated Password");
+                tPassword.setText("");
+                tSecondPassword.setText("");
+                tCurrent.setText("");
+                 
+            }  else {
+                    JOptionPane.showMessageDialog(null, "Please check all fields and try again");
+            }
             
         } catch(Exception e) {
             e.printStackTrace();
@@ -177,25 +224,25 @@ public class AdminMain extends javax.swing.JFrame {
     private void docMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_docMouseClicked
         // TODO add your handling code here:
         this.dispose();
-        new ManageDoctor().setVisible(true);
+        new ManageDoctor("Admin", tUsername.getText()).setVisible(true);
     }//GEN-LAST:event_docMouseClicked
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
         // TODO add your handling code here:
         this.dispose();
-        new ManagePatient().setVisible(true);
+        new ManagePatient("Admin", tUsername.getText()).setVisible(true);
     }//GEN-LAST:event_jButton2MouseClicked
 
     private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
         // TODO add your handling code here:
         this.dispose();
-        new ManageReceptionist().setVisible(true);
+        new ManageReceptionist("Admin", tUsername.getText()).setVisible(true);
     }//GEN-LAST:event_jButton3MouseClicked
 
     private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
         // TODO add your handling code here:
         this.dispose();
-        new ManageSpeciality().setVisible(true);
+        new ManageSpeciality("Admin", tUsername.getText()).setVisible(true);
     }//GEN-LAST:event_jButton4MouseClicked
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
@@ -248,7 +295,12 @@ public class AdminMain extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JPasswordField tCurrent;
     private javax.swing.JPasswordField tPassword;
+    private javax.swing.JPasswordField tSecondPassword;
     private javax.swing.JLabel tUsername;
     private javax.swing.JButton updateButton;
     // End of variables declaration//GEN-END:variables

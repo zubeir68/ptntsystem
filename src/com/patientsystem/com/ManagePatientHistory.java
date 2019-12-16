@@ -21,12 +21,18 @@ public class ManagePatientHistory extends javax.swing.JFrame {
     /**
      * Creates new form ManagePatientHistory
      */
-    public ManagePatientHistory(int id, String firstname, String lastname) {
+    public ManagePatientHistory(int id, String firstname, String lastname, String subject) {
         initComponents();
         displayDocs(id);
         tFirstname.setText(firstname);
         tLastname.setText(lastname);
         patientId.setText(String.valueOf(id));
+        tSubject.setText(subject);
+        if(subject == "Receptionist") {
+            insertButton.setEnabled(false);
+            updateButton.setEnabled(false);
+            deleteButton.setEnabled(false);
+        }
     }
     
     public void displayDocs(int id) {
@@ -92,11 +98,21 @@ public class ManagePatientHistory extends javax.swing.JFrame {
         insertButton = new javax.swing.JButton();
         updateButton = new javax.swing.JButton();
         deleteButton = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        resetButton = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         patientId = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        tSubject = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        tLoggedInUsername = new javax.swing.JLabel();
+        closeWindowButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel1.setText("Patient History");
@@ -109,7 +125,7 @@ public class ManagePatientHistory extends javax.swing.JFrame {
 
         tFirstname.setText("None");
 
-        jLabel6.setText("Lastname:");
+        jLabel6.setText("Patient Lastname");
 
         tLastname.setText("None");
 
@@ -121,7 +137,7 @@ public class ManagePatientHistory extends javax.swing.JFrame {
 
         jLabel10.setText("Blood Pressure(dia):");
 
-        jLabel11.setText("Height:");
+        jLabel11.setText("Height(cm):");
 
         jLabel12.setText("Weight(kg): ");
 
@@ -187,21 +203,36 @@ public class ManagePatientHistory extends javax.swing.JFrame {
             }
         });
 
-        jButton4.setText("Reset Fields");
-        jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
+        resetButton.setText("Reset Fields");
+        resetButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton4MouseClicked(evt);
+                resetButtonMouseClicked(evt);
             }
         });
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        resetButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                resetButtonActionPerformed(evt);
             }
         });
 
         jLabel3.setText("Patient-id:");
 
         patientId.setText("None");
+
+        jLabel5.setText("Logged in as:");
+
+        tSubject.setText("None");
+
+        jLabel7.setText("Username:");
+
+        tLoggedInUsername.setText("None");
+
+        closeWindowButton.setText("Close Window");
+        closeWindowButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                closeWindowButtonMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -210,7 +241,7 @@ public class ManagePatientHistory extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
@@ -236,28 +267,29 @@ public class ManagePatientHistory extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(tBloodSys, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(tWeight, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE))
-                                        .addGap(33, 33, 33)
+                                            .addComponent(tBloodSys, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(tWeight, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(28, 28, 28)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel10)
                                             .addGroup(layout.createSequentialGroup()
                                                 .addComponent(jLabel4)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(tFirstname)))
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(23, 23, 23)
-                                                .addComponent(tBloodDia, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(47, 47, 47)
+                                                .addComponent(tFirstname)
+                                                .addGap(29, 29, 29)
                                                 .addComponent(jLabel6)
                                                 .addGap(18, 18, 18)
                                                 .addComponent(tLastname)
-                                                .addGap(57, 57, 57)
+                                                .addGap(18, 18, 18)
                                                 .addComponent(jLabel3)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(patientId))))
+                                                .addComponent(patientId)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jLabel10)
+                                                .addGap(23, 23, 23)
+                                                .addComponent(tBloodDia, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(closeWindowButton))))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(insertButton)
                                         .addGap(18, 18, 18)
@@ -265,7 +297,16 @@ public class ManagePatientHistory extends javax.swing.JFrame {
                                         .addGap(18, 18, 18)
                                         .addComponent(deleteButton)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jButton4))))
+                                        .addComponent(resetButton)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel5)
+                                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(tLoggedInUsername)
+                                            .addComponent(tSubject))))
+                                .addGap(76, 76, 76))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(15, 15, 15)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -300,36 +341,12 @@ public class ManagePatientHistory extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(29, 29, 29)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel2)
-                                    .addComponent(idLabel)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel8)
-                                .addComponent(tBloodGroup, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel9))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel4)
-                                    .addComponent(tFirstname))
-                                .addComponent(tBloodSys, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(35, 35, 35)
-                        .addComponent(jLabel10)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(21, 21, 21)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(insertButton)
                             .addComponent(updateButton)
                             .addComponent(deleteButton)
-                            .addComponent(jButton4))
+                            .addComponent(resetButton))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(70, 70, 70)
@@ -337,20 +354,26 @@ public class ManagePatientHistory extends javax.swing.JFrame {
                                     .addComponent(jLabel11)
                                     .addComponent(tHeight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel12)
-                                    .addComponent(tWeight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(32, 32, 32))
+                                    .addComponent(tWeight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
+                                .addGap(10, 10, 10)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
+                                        .addGap(4, 4, 4)
+                                        .addComponent(jLabel10))
+                                    .addComponent(tBloodDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                             .addComponent(tLastname)
                                             .addComponent(jLabel3)
                                             .addComponent(patientId))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(tBloodDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jLabel6))
-                                .addGap(36, 36, 36)))
+                                        .addComponent(jLabel6))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel4)
+                                        .addComponent(tFirstname)))))
+                        .addGap(32, 32, 32)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel13)
                             .addComponent(jLabel14)
@@ -363,7 +386,38 @@ public class ManagePatientHistory extends javax.swing.JFrame {
                             .addComponent(tSymptoms, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(tMedTestPres, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(25, 25, 25)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(29, 29, 29)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(jLabel2)
+                                            .addComponent(idLabel)))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addContainerGap()
+                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel8)
+                                        .addComponent(tBloodGroup, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel9))
+                                    .addComponent(tBloodSys, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel5)
+                                    .addComponent(tSubject))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(tLoggedInUsername)
+                                    .addComponent(jLabel7))
+                                .addGap(26, 26, 26)
+                                .addComponent(closeWindowButton)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -374,9 +428,9 @@ public class ManagePatientHistory extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_updateButtonActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void resetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_resetButtonActionPerformed
 
     private void hisTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hisTableMouseClicked
         // TODO add your handling code here:
@@ -399,19 +453,19 @@ public class ManagePatientHistory extends javax.swing.JFrame {
     private void insertButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_insertButtonMouseClicked
         // TODO add your handling code here:
         try{
-            PatientHistoryController phc = new PatientHistoryController();
+            if(tSubject.getText() != "Receptionist") {
+                PatientHistoryController phc = new PatientHistoryController();
             
-            Boolean task = phc.create(Integer.parseInt(patientId.getText()), tBloodGroup.getSelectedItem().toString(), tBloodSys.getText().toString(), tBloodDia.getText().toString() , Float.parseFloat(tHeight.getText()), Float.parseFloat(tWeight.getText()), tSymptoms.getText(), tMedTestPres.getText(), tDiagnosis.getText(), tPrescription.getText());
-            if(task) {
-                JOptionPane.showMessageDialog(null, "Successfully created new history");
-                DefaultTableModel model = (DefaultTableModel)hisTable.getModel();
-                model.setRowCount(0);
-                displayDocs(Integer.parseInt(patientId.getText()));
-            } else {
-                JOptionPane.showMessageDialog(null, "Something went wrong, please check all fields and try again");
+                Boolean task = phc.create(Integer.parseInt(patientId.getText()), tBloodGroup.getSelectedItem().toString(), tBloodSys.getText().toString(), tBloodDia.getText().toString() , Float.parseFloat(tHeight.getText()), Float.parseFloat(tWeight.getText()), tSymptoms.getText(), tMedTestPres.getText(), tDiagnosis.getText(), tPrescription.getText());
+                if(task) {
+                    JOptionPane.showMessageDialog(null, "Successfully created new history");
+                    DefaultTableModel model = (DefaultTableModel)hisTable.getModel();
+                    model.setRowCount(0);
+                    displayDocs(Integer.parseInt(patientId.getText()));
+                }else {
+                    JOptionPane.showMessageDialog(null, "Something went wrong, please check all fields and try again");
+                }
             }
-            
-            
         } catch(Exception e) {
             JOptionPane.showMessageDialog(null, "Something went wrong, please check all fields and try again");
         }
@@ -424,18 +478,21 @@ public class ManagePatientHistory extends javax.swing.JFrame {
     private void updateButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateButtonMouseClicked
         // TODO add your handling code here:
         try {
-            PatientHistoryController phc  = new PatientHistoryController();
-            Boolean task = phc.update(Integer.parseInt(idLabel.getText()), tBloodGroup.getSelectedItem().toString(), Integer.parseInt(tBloodSys.getText()), Integer.parseInt(tBloodDia.getText()), Float.parseFloat(tHeight.getText()), Float.parseFloat(tWeight.getText()), tSymptoms.getText(), tMedTestPres.getText(), tDiagnosis.getText(), tPrescription.getText());
+            if(idLabel.getText() != "None" && tSubject.getText() != "Receptionist") {
+                PatientHistoryController phc  = new PatientHistoryController();
+                Boolean task = phc.update(Integer.parseInt(idLabel.getText()), tBloodGroup.getSelectedItem().toString(), Integer.parseInt(tBloodSys.getText()), Integer.parseInt(tBloodDia.getText()), Float.parseFloat(tHeight.getText()), Float.parseFloat(tWeight.getText()), tSymptoms.getText(), tMedTestPres.getText(), tDiagnosis.getText(), tPrescription.getText());
             
-            if(task) {
-                JOptionPane.showMessageDialog(null, "Successfully updated history");
-                DefaultTableModel model = (DefaultTableModel)hisTable.getModel();
-                model.setRowCount(0);
-                displayDocs(Integer.parseInt(patientId.getText()));
+                if(task) {
+                    JOptionPane.showMessageDialog(null, "Successfully updated history");
+                    DefaultTableModel model = (DefaultTableModel)hisTable.getModel();
+                    model.setRowCount(0);
+                    displayDocs(Integer.parseInt(patientId.getText()));
                 
-            } else {
-                JOptionPane.showMessageDialog(null, "Something went wrong, please check all fields and try again");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Something went wrong, please check all fields and try again");
+                }
             }
+            
             
         } catch(Exception e) {
             System.out.println(e);
@@ -445,7 +502,7 @@ public class ManagePatientHistory extends javax.swing.JFrame {
 
     private void deleteButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteButtonMouseClicked
         // TODO add your handling code here:
-        if(idLabel.getText() != "None") {
+        if(idLabel.getText() != "None" && tSubject.getText() != "Receptionist") {
             PatientHistoryController phc = new PatientHistoryController();
             
             phc.delete(Integer.parseInt(idLabel.getText()));
@@ -455,11 +512,13 @@ public class ManagePatientHistory extends javax.swing.JFrame {
             displayDocs(Integer.parseInt(patientId.getText()));
             
         } else {
-            JOptionPane.showMessageDialog(null, "Please select row in table");
+            if(tSubject.getText() != "Receptionist") {
+                JOptionPane.showMessageDialog(null, "Please select a row in table");
+            }
         }
     }//GEN-LAST:event_deleteButtonMouseClicked
 
-    private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
+    private void resetButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_resetButtonMouseClicked
         // TODO add your handling code here:
         idLabel.setText("None");
         tBloodSys.setText("");
@@ -470,7 +529,21 @@ public class ManagePatientHistory extends javax.swing.JFrame {
         tMedTestPres.setText("");
         tDiagnosis.setText("");
         tPrescription.setText("");
-    }//GEN-LAST:event_jButton4MouseClicked
+    }//GEN-LAST:event_resetButtonMouseClicked
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // TODO add your handling code here:
+        try {
+            new ManageDoctor(tSubject.getText(), tLoggedInUsername.getText()).setVisible(true);
+        } catch(Exception e) {
+            e.printStackTrace();
+        }   
+    }//GEN-LAST:event_formWindowClosing
+
+    private void closeWindowButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeWindowButtonMouseClicked
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_closeWindowButtonMouseClicked
 
     /**
      * @param args the command line arguments
@@ -502,17 +575,17 @@ public class ManagePatientHistory extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ManagePatientHistory(0, "None", "None").setVisible(true);
+                new ManagePatientHistory(0, "None", "None", "None").setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton closeWindowButton;
     private javax.swing.JButton deleteButton;
     private javax.swing.JTable hisTable;
     private javax.swing.JLabel idLabel;
     private javax.swing.JButton insertButton;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -524,11 +597,14 @@ public class ManagePatientHistory extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel patientId;
+    private javax.swing.JButton resetButton;
     private java.awt.TextField tBloodDia;
     private javax.swing.JComboBox<String> tBloodGroup;
     private java.awt.TextField tBloodSys;
@@ -536,8 +612,10 @@ public class ManagePatientHistory extends javax.swing.JFrame {
     private javax.swing.JLabel tFirstname;
     private java.awt.TextField tHeight;
     private javax.swing.JLabel tLastname;
+    private javax.swing.JLabel tLoggedInUsername;
     private java.awt.TextArea tMedTestPres;
     private java.awt.TextArea tPrescription;
+    private javax.swing.JLabel tSubject;
     private java.awt.TextArea tSymptoms;
     private java.awt.TextField tWeight;
     private javax.swing.JButton updateButton;
